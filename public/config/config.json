@@ -1,0 +1,18 @@
+{
+  "CONTRACT_ADDRESS": "0x51a80e80D93E3D892B93388d89E1943F80ef1F8D",
+  "SCAN_LINK": "https://mumbai.polygonscan.com/token/0x51a80e80d93e3d892b93388d89e1943f80ef1f8d",
+  "NETWORK": {
+    "NAME": "Mumbai Polygon",
+    "SYMBOL": "Matic",
+    "ID": 80001
+  },
+  "NFT_NAME": "Hello, Charlie!",
+  "SYMBOL": "HCHR",
+  "MAX_SUPPLY": 500,
+  "WEI_COST": 4000000000000000000,
+  "DISPLAY_COST": 0.69,
+  "GAS_LIMIT": 285000,
+  "MARKETPLACE": "Opeansea",
+  "MARKETPLACE_LINK": "https://testnets.opensea.io/collection/hello-charlie-v2",
+  "SHOW_BACKGROUND": true
+}
