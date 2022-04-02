@@ -28,6 +28,28 @@ export const StyledButton = styled.button`
   }
 `;
 
+export const StyledButton2 = styled.button`
+  padding: 15px 30px;
+  border-radius: 10px;
+  border: none;
+  background-color: var(--secondary);
+  font-weight: bold;
+  color: var(--accent-text);
+  width: 40%;
+  font-size: 30px;
+  cursor: pointer;
+  :active {
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+  }
+
+  @media (max-width: 767px) {
+    width: 60%;
+    font-size: 35px;
+  }
+`;
+
 export const StyledRoundButton = styled.button`
   padding: 10px;
   border-radius: 100%;
@@ -53,15 +75,35 @@ export const StyledRoundButton = styled.button`
   }
 `;
 
+export const StyledRoundButton2 = styled.button`
+  border-radius: 100%;
+  border: 1px solid;
+  background-color: transparent;
+  font-weight: bold;
+  font-size: 25px;
+  color: var(--secondary-text);
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  :active {
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+  }
+`;
+
 export const ResponsiveWrapper = styled.div`
   display: flex;
   flex: 1;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: stretched;
   align-items: stretched;
   width: 100%;
-  @media (min-width: 767px) {
-    flex-direction: row;
+  @media (max-width: 767px) {
+    flex-direction: column-reverse;
   }
 `;
 
@@ -90,7 +132,7 @@ export const StyledImg = styled.img`
 `;
 
 export const StyledLink = styled.a`
-  color: var(--secondary);
+  color: var(--accent-text);
   text-decoration: none;
 `;
 
@@ -121,7 +163,7 @@ function App() {
   });
 
   const claimNFTs = () => {
-    let cost = CONFIG.WEI_COST;
+    let cost = CONFIG.WEI_COST; // 1 ETH OR MATIC = 1000000000000000000 WEI
     let gasLimit = CONFIG.GAS_LIMIT;
     let totalCostWei = String(cost * mintAmount);
     let totalGasLimit = String(gasLimit * mintAmount);
@@ -193,33 +235,202 @@ function App() {
     getData();
   }, [blockchain.account]);
 
+
+  return (
+    <s.Screen2>
+      {/* <ResponsiveWrapper flex={2}> */}
+        <s.Container2 flex={2} image={CONFIG.SHOW_BACKGROUND ? "/config/images/bg5.png" : null}>
+        </s.Container2>
+        <s.Container3 flex={2}>
+          <s.Container flex={2} jc={"center"} ai={"center"}>
+            <s.TextTitle style={{
+              textAlign: "center",
+              fontSize: 50,
+              fontWeight: "bold",
+              color: "var(--primary-text)",}}>
+              {data.totalSupply} / {CONFIG.MAX_SUPPLY}
+            </s.TextTitle>
+            <s.TextDescription style={{
+              textAlign: "center",
+              color: "var(--accent-text)",}}>
+              <StyledLink target={"_blank"} href={CONFIG.SCAN_LINK}>
+                {truncate(CONFIG.CONTRACT_ADDRESS, 15)}
+              </StyledLink>
+            </s.TextDescription>
+            <s.SpacerSmall />
+            { Number(data.totalSupply) >= CONFIG.MAX_SUPPLY ? (
+              <>
+                <s.TextTitle
+                  style={{ textAlign: "center", color: "var(--accent-text)" }}
+                >
+                  The sale has ended.
+                </s.TextTitle>
+                <s.TextDescription
+                  style={{ textAlign: "center", color: "var(--accent-text)" }}
+                >
+                  You can still find {CONFIG.NFT_NAME} on
+                </s.TextDescription>
+                <s.SpacerSmall />
+                <StyledLink target={"_blank"} href={CONFIG.MARKETPLACE_LINK}>
+                  {CONFIG.MARKETPLACE}
+                </StyledLink>
+              </>
+            ) : (
+              <>
+                <s.TextTitle style={{ textAlign: "center", color: "var(--primary-text)" }}>
+                  1 Charlie = {CONFIG.DISPLAY_COST}{" "}
+                  {CONFIG.NETWORK.SYMBOL}.
+                </s.TextTitle>
+                <s.SpacerXSmall />
+                <s.TextDescription style={{ textAlign: "center", color: "var(--accent-text)" }}>
+                  Excluding gas fees.
+                </s.TextDescription>
+                <s.SpacerSmall />
+                { blockchain.account === "" || blockchain.smartContract === null ? (
+                  <s.Container ai={"center"} jc={"center"}>
+                    {/* <s.TextDescription style={{
+                      textAlign: "center",
+                      color: "var(--accent-text)"}}>
+                      Connect to the {CONFIG.NETWORK.NAME} network
+                    </s.TextDescription> */}
+                    <s.SpacerSmall />
+                    <StyledButton2 onClick={(e) => {
+                      e.preventDefault();
+                      dispatch(connect());
+                      getData();}}>
+                      CONNECT
+                    </StyledButton2>
+                    { blockchain.errorMsg !== "" ? (
+                      <>
+                        <s.SpacerSmall />
+                        <s.TextDescription style={{
+                          textAlign: "center",
+                          color: "var(--accent-text)"}}>
+                          {blockchain.errorMsg}
+                        </s.TextDescription>
+                      </>
+                    ) : null }
+                  </s.Container>
+                ) : (
+                  <>
+                    {/* <s.TextDescription style={{
+                      textAlign: "center",
+                      color: "var(--accent-text)"}}>
+                      {feedback}
+                    </s.TextDescription> */}
+                    {/* <s.SpacerMedium /> */}
+                    <s.Container ai={"center"} jc={"center"} fd={"row"}>
+                      <StyledRoundButton2 style={{ lineHeight: 0.4 }}
+                        disabled={claimingNft ? 1 : 0}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          decrementMintAmount();
+                        }}>
+                        -
+                      </StyledRoundButton2>
+                      <s.SpacerMedium />
+                      <s.TextDescription style={{
+                        textAlign: "center",
+                        color: "var(--primary-text)",
+                        fontWeight: "bold",
+                        fontSize: "35px"}}>
+                        {mintAmount}
+                      </s.TextDescription>
+                      <s.SpacerMedium />
+                      <StyledRoundButton2 disabled={claimingNft ? 1 : 0}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          incrementMintAmount();
+                        }}>
+                        +
+                      </StyledRoundButton2>
+                    </s.Container>
+                    <s.SpacerSmall />
+                    <s.Container ai={"center"} jc={"center"} fd={"row"}>
+                      <StyledButton2 disabled={claimingNft ? 1 : 0}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          claimNFTs();
+                          getData();
+                        }}>
+                        {claimingNft ? "BUSY" : "MINT"}
+                      </StyledButton2>
+                    </s.Container>
+                  </>
+                )}
+              </>
+            )}
+            {/* <s.SpacerMedium /> */}
+          </s.Container>
+          {/* <s.SpacerLarge /> */}
+        </s.Container3>
+      {/* </ResponsiveWrapper> */}
+    </s.Screen2>
+  )
+
+  return {/* <s.Container flex={2} jc={"center"} ai={"center"}>
+  <s.TextTitle style={{
+    textAlign: "center",
+    fontSize: 50,
+    fontWeight: "bold",
+    color: "var(--accent-text)",}}>
+    {data.totalSupply} / {CONFIG.MAX_SUPPLY}
+  </s.TextTitle>
+  <s.TextDescription style={{
+    textAlign: "center",
+    color: "var(--primary-text)",}}>
+    <StyledLink target={"_blank"} href={CONFIG.SCAN_LINK}>
+      {truncate(CONFIG.CONTRACT_ADDRESS, 15)}
+    </StyledLink>
+  </s.TextDescription>
+  <s.SpacerSmall/> */}
+  {/* { Number(data.totalSupply) >= CONFIG.MAX_SUPPLY ? (
+    <>
+      <s.TextTitle style={{ textAlign: "center", color: "var(--accent-text)" }}>
+        The sale has ended.
+      </s.TextTitle>
+      <s.TextDescription style={{ textAlign: "center", color: "var(--accent-text)" }}>
+        You can still find {CONFIG.NFT_NAME} on
+      </s.TextDescription>
+      <s.SpacerSmall/>
+      <StyledLink target={"_blank"} href={CONFIG.MARKETPLACE_LINK}>
+        {CONFIG.MARKETPLACE}
+      </StyledLink>
+    </>
+    ) : (
+    <>
+    </>
+    )
+  } */}
+{/* </s.Container> */}
+
   return (
     <s.Screen>
       <s.Container
         flex={1}
         ai={"center"}
         style={{ padding: 24, backgroundColor: "var(--primary)" }}
-        image={CONFIG.SHOW_BACKGROUND ? "/config/images/bg.png" : null}
+        image={CONFIG.SHOW_BACKGROUND ? "/config/images/bg4.png" : null}
       >
-        <a href={CONFIG.MARKETPLACE_LINK}>
+        {/* <a href={CONFIG.MARKETPLACE_LINK}>
           <StyledLogo alt={"logo"} src={"/config/images/logo.png"} />
-        </a>
+        </a> */}
         <s.SpacerSmall />
         <ResponsiveWrapper flex={1} style={{ padding: 24 }} test>
-          <s.Container flex={1} jc={"center"} ai={"center"}>
+          {/* <s.Container flex={1} jc={"center"} ai={"center"}>
             <StyledImg alt={"example"} src={"/config/images/example.gif"} />
-          </s.Container>
+          </s.Container> */}
           <s.SpacerLarge />
           <s.Container
             flex={2}
             jc={"center"}
             ai={"center"}
             style={{
-              backgroundColor: "var(--accent)",
-              padding: 24,
-              borderRadius: 24,
-              border: "4px dashed var(--secondary)",
-              boxShadow: "0px 5px 11px 2px rgba(0,0,0,0.7)",
+              backgroundColor: "transparent",
+              // padding: 24,
+              // borderRadius: 24,
+              // border: "4px dashed var(--secondary)",
+              // boxShadow: "0px 5px 11px 2px rgba(0,0,0,0.7)",
             }}
           >
             <s.TextTitle
@@ -247,7 +458,7 @@ function App() {
                 textAlign: "center",
               }}
             >
-              <StyledButton
+              {/* <StyledButton
                 onClick={(e) => {
                   window.open("/config/roadmap.pdf", "_blank");
                 }}
@@ -266,7 +477,7 @@ function App() {
                 }}
               >
                 {CONFIG.MARKETPLACE}
-              </StyledButton>
+              </StyledButton> */}
             </span>
             <s.SpacerSmall />
             {Number(data.totalSupply) >= CONFIG.MAX_SUPPLY ? (
@@ -291,7 +502,7 @@ function App() {
                 <s.TextTitle
                   style={{ textAlign: "center", color: "var(--accent-text)" }}
                 >
-                  1 {CONFIG.SYMBOL} costs {CONFIG.DISPLAY_COST}{" "}
+                  1 Charlie = {CONFIG.DISPLAY_COST}{" "}
                   {CONFIG.NETWORK.SYMBOL}.
                 </s.TextTitle>
                 <s.SpacerXSmall />
@@ -398,13 +609,13 @@ function App() {
             <s.SpacerMedium />
           </s.Container>
           <s.SpacerLarge />
-          <s.Container flex={1} jc={"center"} ai={"center"}>
+          {/* <s.Container flex={1} jc={"center"} ai={"center"}>
             <StyledImg
               alt={"example"}
               src={"/config/images/example.gif"}
               style={{ transform: "scaleX(-1)" }}
             />
-          </s.Container>
+          </s.Container> */}
         </ResponsiveWrapper>
         <s.SpacerMedium />
         <s.Container jc={"center"} ai={"center"} style={{ width: "70%" }}>
@@ -419,7 +630,7 @@ function App() {
             Once you make the purchase, you cannot undo this action.
           </s.TextDescription>
           <s.SpacerSmall />
-          <s.TextDescription
+          {/* <s.TextDescription
             style={{
               textAlign: "center",
               color: "var(--primary-text)",
@@ -428,7 +639,7 @@ function App() {
             We have set the gas limit to {CONFIG.GAS_LIMIT} for the contract to
             successfully mint your NFT. We recommend that you don't lower the
             gas limit.
-          </s.TextDescription>
+          </s.TextDescription> */}
         </s.Container>
       </s.Container>
     </s.Screen>
