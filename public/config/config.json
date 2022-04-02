@@ -1,18 +1,18 @@
 {
-  "CONTRACT_ADDRESS": "0x51a80e80D93E3D892B93388d89E1943F80ef1F8D",
-  "SCAN_LINK": "https://mumbai.polygonscan.com/token/0x51a80e80d93e3d892b93388d89e1943f80ef1f8d",
+  "CONTRACT_ADDRESS": "0xCd2c3Ee8BcE6ab756E8D60CE1BdC8D1fe4873dE2",
+  "SCAN_LINK": "https://rinkeby.etherscan.io/token/0xcd2c3ee8bce6ab756e8d60ce1bdc8d1fe4873de2",
   "NETWORK": {
-    "NAME": "Mumbai Polygon",
-    "SYMBOL": "Matic",
-    "ID": 80001
+    "NAME": "Rinkeby",
+    "SYMBOL": "ETH",
+    "ID": 4
   },
   "NFT_NAME": "Hello, Charlie!",
   "SYMBOL": "HCHR",
   "MAX_SUPPLY": 500,
-  "WEI_COST": 4000000000000000000,
-  "DISPLAY_COST": 0.69,
+  "WEI_COST": 1000000000000000,
+  "DISPLAY_COST": 0.001,
   "GAS_LIMIT": 285000,
   "MARKETPLACE": "Opeansea",
-  "MARKETPLACE_LINK": "https://testnets.opensea.io/collection/hello-charlie-v2",
+  "MARKETPLACE_LINK": "https://testnets.opensea.io/collection/hello-charlie-eth",
   "SHOW_BACKGROUND": true
 }
