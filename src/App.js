@@ -239,7 +239,7 @@ function App() {
   return (
     <s.Screen2>
       {/* <ResponsiveWrapper flex={2}> */}
-        <s.Container2 flex={2} image={CONFIG.SHOW_BACKGROUND ? "/config/images/bg5.png" : null}>
+        <s.Container2 flex={2} image={CONFIG.SHOW_BACKGROUND ? "/config/images/bg6.png" : null}>
         </s.Container2>
         <s.Container3 flex={2}>
           <s.Container flex={2} jc={"center"} ai={"center"}>
