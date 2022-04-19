@@ -38,10 +38,16 @@ export const StyledButton2 = styled.button`
   width: 40%;
   font-size: 30px;
   cursor: pointer;
+
   :active {
     box-shadow: none;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
+  }
+
+  :disabled {
+    pointer-events: none;
+    opacity: 0.5;
   }
 
   @media (max-width: 767px) {
@@ -354,7 +360,7 @@ function App() {
                           claimNFTs();
                           getData();
                         }}>
-                        {claimingNft ? "BUSY" : "MINT"}
+                        {claimingNft ? "MINTING..." : "MINT"}
                       </StyledButton2>
                     </s.Container>
                   </>
