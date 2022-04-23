@@ -336,7 +336,8 @@ function App() {
                       <>
                         <s.TextDescription style={{
                         textAlign: "center",
-                        color: isErrorMsg === 1 ? "var(--err-text)" : "var(--primary-text)"}}>
+                        color: isErrorMsg === 1 ? "var(--err-text)" : "var(--primary-text)",
+                        fontWeight: "bold"}}>
                         {feedback}
                         </s.TextDescription>
                         <s.SpacerSmall />
