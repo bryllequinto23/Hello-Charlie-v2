@@ -217,9 +217,9 @@ function App() {
     let newMintAmount;
 
     if (mintAmount === 30) {
-      mintAmount = 30;
+      newMintAmount = 30;
     } else if (tempTotal === CONFIG.MAX_SUPPLY) {
-      mintAmount = mintAmount;
+      newMintAmount = mintAmount;
     } else {
       newMintAmount = mintAmount + 1;
     }
