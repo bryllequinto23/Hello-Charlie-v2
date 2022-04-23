@@ -192,7 +192,7 @@ function App() {
         setErrorMsg(1);
         setFeedback("Sorry, something went wrong please try again later.");
         setClaimingNft(false);
-        setTimeout(() => setFeedback(``), 2000);
+        setTimeout(() => setFeedback(``), 4000);
       })
       .then((receipt) => {
         console.log(receipt);
@@ -202,7 +202,7 @@ function App() {
         );
         setClaimingNft(false);
         dispatch(fetchData(blockchain.account));
-        setTimeout(() => setFeedback(``), 2000);
+        setTimeout(() => setFeedback(``), 4000);
       });
   };
 
