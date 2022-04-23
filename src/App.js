@@ -177,8 +177,8 @@ function App() {
     console.log("Cost: ", totalCostWei);
     console.log("Gas limit: ", totalGasLimit);
     setErrorMsg(0);
-    setClaimingNft(true);
     setFeedback(`Minting your Charlie...`);
+    setClaimingNft(true);
     blockchain.smartContract.methods
       .mint(blockchain.account, mintAmount)
       .send({
@@ -332,7 +332,7 @@ function App() {
                   </s.Container>
                 ) : (
                   <>
-                    { feedback !== "" && !claimingNft ? (
+                    { feedback !== "" ? (
                       <>
                         <s.TextDescription style={{
                         textAlign: "center",
