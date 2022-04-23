@@ -147,7 +147,7 @@ function App() {
   const blockchain = useSelector((state) => state.blockchain);
   const data = useSelector((state) => state.data);
   const [claimingNft, setClaimingNft] = useState(false);
-  const [feedback, setFeedback] = useState(`Click buy to mint your NFT.`);
+  const [feedback, setFeedback] = useState(``);
   const [mintAmount, setMintAmount] = useState(1);
   const [isErrorMsg, setErrorMsg] = useState(0);
   const [CONFIG, SET_CONFIG] = useState({
@@ -325,7 +325,7 @@ function App() {
                   <>
                     <s.TextDescription style={{
                       textAlign: "center",
-                      color: isErrorMsg === 0 ? "var(--err-text)" : "var(--accent-text)"}}>
+                      color: isErrorMsg === 1 ? "var(--err-text)" : "var(--accent-text)"}}>
                       {feedback}
                     </s.TextDescription>
                     {/* <s.SpacerMedium /> */}
