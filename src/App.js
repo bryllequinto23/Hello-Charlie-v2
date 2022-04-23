@@ -339,7 +339,7 @@ function App() {
                       color: isErrorMsg === 1 ? "var(--err-text)" : "var(--accent-text)"}}>
                       {feedback}
                     </s.TextDescription>
-                    {/* <s.SpacerMedium /> */}
+                    <s.SpacerSmall />
                     <s.Container ai={"center"} jc={"center"} fd={"row"}>
                       <StyledRoundButton2 style={{ lineHeight: 0.4 }}
                         disabled={claimingNft ? 1 : 0}
