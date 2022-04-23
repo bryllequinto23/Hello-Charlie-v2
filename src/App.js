@@ -177,7 +177,7 @@ function App() {
     console.log("Cost: ", totalCostWei);
     console.log("Gas limit: ", totalGasLimit);
     setErrorMsg(0);
-    setFeedback(`Minting your CHARLIE...`);
+    setFeedback(`Minting your Charlie...`);
     setClaimingNft(true);
     blockchain.smartContract.methods
       .mint(blockchain.account, mintAmount)
@@ -197,7 +197,7 @@ function App() {
         console.log(receipt);
         setErrorMsg(0);
         setFeedback(
-          `WOW, the ${CONFIG.NFT_NAME} is yours! go visit Opensea.io to view it.`
+          `Your Charlie has been minted. Visit Opensea.io to view it.`
         );
         setClaimingNft(false);
         dispatch(fetchData(blockchain.account));
@@ -217,8 +217,6 @@ function App() {
     let tempTotal = mintAmount + totSupply;
     let newMintAmount;
 
-    console.log(tempTotal)
-    console.log(CONFIG.MAX_SUPPLY)
     if (tempTotal === CONFIG.MAX_SUPPLY) {
       newMintAmount = mintAmount;
     } else if (mintAmount === 30) {
@@ -336,7 +334,7 @@ function App() {
                   <>
                     <s.TextDescription style={{
                       textAlign: "center",
-                      color: isErrorMsg === 1 ? "var(--err-text)" : "var(--accent-text)"}}>
+                      color: isErrorMsg === 1 ? "var(--err-text)" : "var(--primary-text)"}}>
                       {feedback}
                     </s.TextDescription>
                     <s.SpacerSmall />
