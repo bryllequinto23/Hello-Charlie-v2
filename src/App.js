@@ -216,10 +216,10 @@ function App() {
     let tempTotal = mintAmount + data.totalSupply;
     let newMintAmount;
 
-    if (mintAmount === 30) {
-      newMintAmount = 30;
-    } else if (tempTotal === CONFIG.MAX_SUPPLY) {
+    if (tempTotal === CONFIG.MAX_SUPPLY) {
       newMintAmount = mintAmount;
+    } else if (mintAmount === 30) {
+      newMintAmount = 30;
     } else {
       newMintAmount = mintAmount + 1;
     }
