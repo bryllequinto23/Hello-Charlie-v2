@@ -214,8 +214,11 @@ function App() {
 
   const incrementMintAmount = () => {
     let newMintAmount = mintAmount + 1;
+    let tempTotal = newMintAmount + data.totalSupply;
     if (newMintAmount > 30) {
       newMintAmount = 30;
+    } else if (tempTotal > CONFIG.MAX_SUPPLY) {
+      newMintAmount = newMintAmount;
     }
     setMintAmount(newMintAmount);
   };
