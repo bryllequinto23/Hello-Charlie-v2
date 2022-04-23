@@ -216,6 +216,8 @@ function App() {
     let tempTotal = mintAmount + data.totalSupply;
     let newMintAmount;
 
+    console.log(tempTotal)
+    console.log(CONFIG.MAX_SUPPLY)
     if (tempTotal === CONFIG.MAX_SUPPLY) {
       newMintAmount = mintAmount;
     } else if (mintAmount === 30) {
