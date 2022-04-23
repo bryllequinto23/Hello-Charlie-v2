@@ -332,12 +332,16 @@ function App() {
                   </s.Container>
                 ) : (
                   <>
-                    <s.TextDescription style={{
-                      textAlign: "center",
-                      color: isErrorMsg === 1 ? "var(--err-text)" : "var(--primary-text)"}}>
-                      {feedback}
-                    </s.TextDescription>
-                    <s.SpacerSmall />
+                    { feedback !== "" && !claimingNft ? (
+                      <>
+                        <s.TextDescription style={{
+                        textAlign: "center",
+                        color: isErrorMsg === 1 ? "var(--err-text)" : "var(--primary-text)"}}>
+                        {feedback}
+                        </s.TextDescription>
+                        <s.SpacerSmall />
+                      </>
+                    ) : null }
                     <s.Container ai={"center"} jc={"center"} fd={"row"}>
                       <StyledRoundButton2 style={{ lineHeight: 0.4 }}
                         disabled={claimingNft ? 1 : 0}
