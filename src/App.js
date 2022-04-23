@@ -213,13 +213,17 @@ function App() {
   };
 
   const incrementMintAmount = () => {
-    let newMintAmount = mintAmount + 1;
-    let tempTotal = newMintAmount + data.totalSupply;
-    if (newMintAmount > 30) {
-      newMintAmount = 30;
-    } else if (tempTotal > CONFIG.MAX_SUPPLY) {
-      newMintAmount = newMintAmount;
+    let tempTotal = mintAmount + data.totalSupply;
+    let newMintAmount;
+
+    if (mintAmount === 30) {
+      mintAmount = 30;
+    } else if (tempTotal === CONFIG.MAX_SUPPLY) {
+      mintAmount = mintAmount;
+    } else {
+      newMintAmount = mintAmount + 1;
     }
+    
     setMintAmount(newMintAmount);
   };
 
