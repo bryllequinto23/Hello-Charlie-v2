@@ -213,7 +213,8 @@ function App() {
   };
 
   const incrementMintAmount = () => {
-    let tempTotal = mintAmount + data.totalSupply;
+    let totSupply = +(data.totalSupply);
+    let tempTotal = mintAmount + totSupply;
     let newMintAmount;
 
     console.log(tempTotal)
