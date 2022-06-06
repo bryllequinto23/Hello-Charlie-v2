@@ -183,9 +183,7 @@ function App() {
 
     blockchain.smartContract.methods
       .whiteListSale()
-      .send({
-        from: blockchain.account
-      })
+      .call()
       .once("error", (err) => {
         console.log("error!!!")
         console.log(err);
@@ -196,31 +194,31 @@ function App() {
       });
 
 
-    blockchain.smartContract.methods
-      .publicMint(mintAmount)
-      .send({
-        gasLimit: String(totalGasLimit),
-        to: CONFIG.CONTRACT_ADDRESS,
-        from: blockchain.account,
-        value: totalCostWei,
-      })
-      .once("error", (err) => {
-        console.log(err);
-        setErrorMsg(1);
-        setFeedback("Sorry, something went wrong please try again later.");
-        setClaimingNft(false);
-        setTimeout(() => setFeedback(``), 4000);
-      })
-      .then((receipt) => {
-        console.log(receipt);
-        setErrorMsg(0);
-        setFeedback(
-          `Your Charlie has been minted. Visit Opensea.io to view it.`
-        );
-        setClaimingNft(false);
-        dispatch(fetchData(blockchain.account));
-        setTimeout(() => setFeedback(``), 4000);
-      });
+    // blockchain.smartContract.methods
+    //   .publicMint(mintAmount)
+    //   .send({
+    //     gasLimit: String(totalGasLimit),
+    //     to: CONFIG.CONTRACT_ADDRESS,
+    //     from: blockchain.account,
+    //     value: totalCostWei,
+    //   })
+    //   .once("error", (err) => {
+    //     console.log(err);
+    //     setErrorMsg(1);
+    //     setFeedback("Sorry, something went wrong please try again later.");
+    //     setClaimingNft(false);
+    //     setTimeout(() => setFeedback(``), 4000);
+    //   })
+    //   .then((receipt) => {
+    //     console.log(receipt);
+    //     setErrorMsg(0);
+    //     setFeedback(
+    //       `Your Charlie has been minted. Visit Opensea.io to view it.`
+    //     );
+    //     setClaimingNft(false);
+    //     dispatch(fetchData(blockchain.account));
+    //     setTimeout(() => setFeedback(``), 4000);
+    //   });
   };
 
   const decrementMintAmount = () => {
