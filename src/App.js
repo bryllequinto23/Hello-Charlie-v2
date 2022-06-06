@@ -143,6 +143,8 @@ export const StyledLink = styled.a`
 `;
 
 function App() {
+  checkWhitelistSale();
+
   const dispatch = useDispatch();
   const blockchain = useSelector((state) => state.blockchain);
   const data = useSelector((state) => state.data);
@@ -150,6 +152,7 @@ function App() {
   const [feedback, setFeedback] = useState(``);
   const [mintAmount, setMintAmount] = useState(1);
   const [isErrorMsg, setErrorMsg] = useState(0);
+  const [isWhitelistSale, setWhitelistSale] = useState(false);
   const [CONFIG, SET_CONFIG] = useState({
     CONTRACT_ADDRESS: "",
     SCAN_LINK: "",
@@ -169,6 +172,21 @@ function App() {
     SHOW_BACKGROUND: false,
   });
 
+  const checkWhitelistSale = () => {
+    // check value of whitelist sale (true or false)
+    blockchain.smartContract.methods
+    .whiteListSale()
+    .call()
+    .then((isWhitelistSale) => {
+      setWhitelistSale(isWhitelistSale);
+      // if (isWhitelistSale) {
+      //   whitelistMint();
+      // } else {
+      //   publicMint();
+      // }
+    });
+  };
+
   const claimNFTs = () => {
     let cost = CONFIG.WEI_COST; // 1 ETH OR MATIC = 1000000000000000000 WEI
     let gasLimit = CONFIG.GAS_LIMIT;
@@ -180,41 +198,41 @@ function App() {
     setFeedback(`Minting your Charlie...`);
     setClaimingNft(true);
 
+    
 
+
+    
+  };
+
+  const whitelistMint = () => {
+  };
+
+  const publicMint = () => {
     blockchain.smartContract.methods
-      .whiteListSale()
-      .call()
+      .publicMint(mintAmount)
+      .send({
+        gasLimit: String(totalGasLimit),
+        to: CONFIG.CONTRACT_ADDRESS,
+        from: blockchain.account,
+        value: totalCostWei,
+      })
+      .once("error", (err) => {
+        console.log(err);
+        setErrorMsg(1);
+        setFeedback("Sorry, something went wrong please try again later.");
+        setClaimingNft(false);
+        setTimeout(() => setFeedback(``), 4000);
+      })
       .then((receipt) => {
-        console.log("success!!!")
         console.log(receipt);
+        setErrorMsg(0);
+        setFeedback(
+          `Your Charlie has been minted. Visit Opensea.io to view it.`
+        );
+        setClaimingNft(false);
+        dispatch(fetchData(blockchain.account));
+        setTimeout(() => setFeedback(``), 4000);
       });
-
-
-    // blockchain.smartContract.methods
-    //   .publicMint(mintAmount)
-    //   .send({
-    //     gasLimit: String(totalGasLimit),
-    //     to: CONFIG.CONTRACT_ADDRESS,
-    //     from: blockchain.account,
-    //     value: totalCostWei,
-    //   })
-    //   .once("error", (err) => {
-    //     console.log(err);
-    //     setErrorMsg(1);
-    //     setFeedback("Sorry, something went wrong please try again later.");
-    //     setClaimingNft(false);
-    //     setTimeout(() => setFeedback(``), 4000);
-    //   })
-    //   .then((receipt) => {
-    //     console.log(receipt);
-    //     setErrorMsg(0);
-    //     setFeedback(
-    //       `Your Charlie has been minted. Visit Opensea.io to view it.`
-    //     );
-    //     setClaimingNft(false);
-    //     dispatch(fetchData(blockchain.account));
-    //     setTimeout(() => setFeedback(``), 4000);
-    //   });
   };
 
   const decrementMintAmount = () => {
@@ -309,7 +327,7 @@ function App() {
             ) : (
               <>
                 <s.TextTitle style={{ textAlign: "center", color: "var(--primary-text)" }}>
-                  1 Charlie = {CONFIG.DISPLAY_COST}{" "}
+                  1 Charlie = { isWhitelistSale ? CONFIG.DISPLAY_COST : CONFIG.DISPLAY_COST}{" "}
                   {CONFIG.NETWORK.SYMBOL}.
                 </s.TextTitle>
                 <s.SpacerXSmall />
