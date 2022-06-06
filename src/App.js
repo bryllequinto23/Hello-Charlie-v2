@@ -184,10 +184,6 @@ function App() {
     blockchain.smartContract.methods
       .whiteListSale()
       .call()
-      .once("error", (err) => {
-        console.log("error!!!")
-        console.log(err);
-      })
       .then((receipt) => {
         console.log("success!!!")
         console.log(receipt);
