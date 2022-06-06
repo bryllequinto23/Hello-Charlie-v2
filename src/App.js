@@ -143,7 +143,6 @@ export const StyledLink = styled.a`
 `;
 
 function App() {
-  checkWhitelistSale();
 
   const dispatch = useDispatch();
   const blockchain = useSelector((state) => state.blockchain);
@@ -186,6 +185,8 @@ function App() {
       // }
     });
   };
+
+  checkWhitelistSale();
 
   const claimNFTs = () => {
     let cost = CONFIG.WEI_COST; // 1 ETH OR MATIC = 1000000000000000000 WEI
