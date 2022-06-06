@@ -181,7 +181,17 @@ function App() {
     setClaimingNft(true);
 
 
-    console.log(blockchain.smartContract)
+    blockchain.smartContract.methods
+      .whiteListSale()
+      .send({
+        from: blockchain.account
+      })
+      .once("error", (err) => {
+        console.log(err);
+      })
+      .then((receipt) => {
+        console.log(receipt);
+      });
 
 
     blockchain.smartContract.methods
