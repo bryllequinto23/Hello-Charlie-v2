@@ -179,6 +179,11 @@ function App() {
     setErrorMsg(0);
     setFeedback(`Minting your Charlie...`);
     setClaimingNft(true);
+
+
+    console.log(blockchain.smartContract)
+
+
     blockchain.smartContract.methods
       .publicMint(mintAmount)
       .send({
