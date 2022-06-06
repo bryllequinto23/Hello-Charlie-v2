@@ -1,6 +1,6 @@
 {
-  "CONTRACT_ADDRESS": "0xA1F6F73FB74e609fD067537d3671d315D1E55767",
-  "SCAN_LINK": "https://rinkeby.etherscan.io/token/0xA1F6F73FB74e609fD067537d3671d315D1E55767",
+  "CONTRACT_ADDRESS": "0x270642A357d91F52dBA858590fB099949C9bb548",
+  "SCAN_LINK": "https://rinkeby.etherscan.io/token/0x270642A357d91F52dBA858590fB099949C9bb548",
   "NETWORK": {
     "NAME": "Rinkeby",
     "SYMBOL": "ETH",
@@ -13,6 +13,6 @@
   "DISPLAY_COST": 0.001,
   "GAS_LIMIT": 285000,
   "MARKETPLACE": "Opeansea",
-  "MARKETPLACE_LINK": "https://testnets.opensea.io/collection/hello-charlie-eth",
+  "MARKETPLACE_LINK": "https://testnets.opensea.io/collection/ch4rle-v4",
   "SHOW_BACKGROUND": true
 }
