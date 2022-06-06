@@ -151,7 +151,7 @@ function App() {
   const [feedback, setFeedback] = useState(``);
   const [mintAmount, setMintAmount] = useState(1);
   const [isErrorMsg, setErrorMsg] = useState(0);
-  const [isWhitelistSale, setWhitelistSale] = useState(false);
+  const [isConnected, setConnected] = useState(false);
   const [CONFIG, SET_CONFIG] = useState({
     CONTRACT_ADDRESS: "",
     SCAN_LINK: "",
@@ -185,8 +185,6 @@ function App() {
       // }
     });
   };
-
-  checkWhitelistSale();
 
   const claimNFTs = () => {
     let cost = CONFIG.WEI_COST; // 1 ETH OR MATIC = 1000000000000000000 WEI
@@ -277,6 +275,14 @@ function App() {
     SET_CONFIG(config);
   };
 
+  const checkIfConnected = () => {
+    if (blockchain.account !== "" && blockchain.smartContract !== null) {
+      setConnected(true);
+    } else {
+      setConnected(false);
+    }
+  }
+
   useEffect(() => {
     getConfig();
   }, []);
@@ -327,14 +333,18 @@ function App() {
               </>
             ) : (
               <>
-                <s.TextTitle style={{ textAlign: "center", color: "var(--primary-text)" }}>
-                  1 Charlie = { isWhitelistSale ? CONFIG.DISPLAY_COST : CONFIG.DISPLAY_COST}{" "}
-                  {CONFIG.NETWORK.SYMBOL}.
-                </s.TextTitle>
-                <s.SpacerXSmall />
-                <s.TextDescription style={{ textAlign: "center", color: "var(--accent-text)" }}>
-                  Excluding gas fees.
-                </s.TextDescription>
+                { isConnected ? (
+                  <>
+                    <s.TextTitle style={{ textAlign: "center", color: "var(--primary-text)" }}>
+                      1 Charlie = { isWhitelistSale ? CONFIG.DISPLAY_COST : CONFIG.DISPLAY_COST}{" "}
+                      {CONFIG.NETWORK.SYMBOL}.
+                    </s.TextTitle>
+                    <s.SpacerXSmall />
+                    <s.TextDescription style={{ textAlign: "center", color: "var(--accent-text)" }}>
+                      Excluding gas fees.
+                    </s.TextDescription>
+                  </>
+                ) : null }
                 <s.SpacerSmall />
                 { blockchain.account === "" || blockchain.smartContract === null ? (
                   <s.Container ai={"center"} jc={"center"}>
@@ -347,7 +357,8 @@ function App() {
                     <StyledButton2 onClick={(e) => {
                       e.preventDefault();
                       dispatch(connect());
-                      getData();}}>
+                      getData();
+                      checkIfConnected();}}>
                       CONNECT
                     </StyledButton2>
                     { blockchain.errorMsg !== "" ? (
