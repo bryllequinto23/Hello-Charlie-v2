@@ -187,9 +187,11 @@ function App() {
         from: blockchain.account
       })
       .once("error", (err) => {
+        console.log("error!!!")
         console.log(err);
       })
       .then((receipt) => {
+        console.log("success!!!")
         console.log(receipt);
       });
 
