@@ -5,6 +5,7 @@ import { fetchData } from "./redux/data/dataActions";
 import * as s from "./styles/globalStyles";
 import styled from "styled-components";
 import keccak256 from "keccak256";
+import MerkleTree from "merkletreejs";
 
 const truncate = (input, len) =>
   input.length > len ? `${input.substring(0, len)}...` : input;
