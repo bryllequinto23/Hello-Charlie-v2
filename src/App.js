@@ -190,7 +190,8 @@ function App() {
   };
 
   const claimNFTs = () => {
-    let cost = CONFIG.WEI_COST; // 1 ETH OR MATIC = 1000000000000000000 WEI
+    // let cost = CONFIG.WEI_COST; // 1 ETH OR MATIC = 1000000000000000000 WEI
+    let cost = CONFIG.WEI_COST_WL;
     let gasLimit = CONFIG.GAS_LIMIT;
     let totalCostWei = String(cost * mintAmount);
     let totalGasLimit = String(gasLimit * mintAmount);
@@ -204,10 +205,36 @@ function App() {
     const tree = new MerkleTree(l, keccak256, { sortPairs: true });
     const buf2hex = x => '0x' + x.toString('hex')
 
-    console.log(buf2hex(tree.getRoot()))
+    // console.log(buf2hex(tree.getRoot()))
 
+    const leaf = keccak256(blockchain.account);
+    const proof = tree.getProof(leaf).map(x => buf2hex(x.data));
 
-    
+    blockchain.smartContract.methods
+      .whitelistMint(proof, mintAmount)
+      .send({
+        gasLimit: String(totalGasLimit),
+        to: CONFIG.CONTRACT_ADDRESS,
+        from: blockchain.account,
+        value: totalCostWei,
+      })
+      .once("error", (err) => {
+        console.log(err);
+        setErrorMsg(1);
+        setFeedback("Sorry, something went wrong please try again later.");
+        setClaimingNft(false);
+        setTimeout(() => setFeedback(``), 4000);
+      })
+      .then((receipt) => {
+        console.log(receipt);
+        setErrorMsg(0);
+        setFeedback(
+          `Your Charlie has been minted. Visit Opensea.io to view it.`
+        );
+        setClaimingNft(false);
+        dispatch(fetchData(blockchain.account));
+        setTimeout(() => setFeedback(``), 4000);
+      });
   };
 
   const whitelistMint = () => {
