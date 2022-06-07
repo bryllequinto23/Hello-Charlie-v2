@@ -4,6 +4,7 @@ import { connect } from "./redux/blockchain/blockchainActions";
 import { fetchData } from "./redux/data/dataActions";
 import * as s from "./styles/globalStyles";
 import styled from "styled-components";
+import keccak256 from "keccak256";
 
 const truncate = (input, len) =>
   input.length > len ? `${input.substring(0, len)}...` : input;
@@ -169,6 +170,7 @@ function App() {
     MARKETPLACE: "",
     MARKETPLACE_LINK: "",
     SHOW_BACKGROUND: false,
+    WL: []
   });
 
   const checkWhitelistSale = () => {
@@ -197,7 +199,11 @@ function App() {
     setFeedback(`Minting your Charlie...`);
     setClaimingNft(true);
 
-    
+    const l = CONFIG.WL.map(x = keccak256(x));
+    const tree = new MerkleTree(leaves, keccak256, { sortPairs: true });
+    const buf2hex = x => '0x' + x.toString('hex')
+
+    console.log(buf2hex(tree.getRoot()))
 
 
     

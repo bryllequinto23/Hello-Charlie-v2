@@ -16,5 +16,15 @@
   "GAS_LIMIT": 285000,
   "MARKETPLACE": "Opeansea",
   "MARKETPLACE_LINK": "https://testnets.opensea.io/collection/ch4rle-v4",
-  "SHOW_BACKGROUND": true
+  "SHOW_BACKGROUND": true,
+  "WL": [
+    "0xD69075aDeFCc90815E7f521136a3EdD28faf9914",
+    "0x4061D2E821D20F7702493EA3e21dC09C297227de",
+    "0x639f02eb1929b8fde52b06986863fa6eb2ba61ff",
+    "0xec8d8a878c6bb90857f8206d24a5c40ebf0f0bc1",
+    "0x93f0dff6709784df7121c5b0cf8b246e99e9db58",
+    "0x8523f1928d6f6730bf2a423bd08f2be273787d39",
+    "0x9fc592be43b9bae1c720ba7cc4873da55631599f",
+    "0xA4c1fB56FeCe5954828A9556Df1cC7bB29516f93"
+  ]
 }
