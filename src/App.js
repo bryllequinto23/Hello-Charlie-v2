@@ -199,7 +199,7 @@ function App() {
     setFeedback(`Minting your Charlie...`);
     setClaimingNft(true);
 
-    const l = CONFIG.WL.map(x = keccak256(x));
+    const l = CONFIG.WL.map(x => keccak256(x));
     const tree = new MerkleTree(leaves, keccak256, { sortPairs: true });
     const buf2hex = x => '0x' + x.toString('hex')
 
