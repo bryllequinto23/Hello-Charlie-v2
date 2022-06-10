@@ -205,7 +205,7 @@ function App() {
     const tree = new MerkleTree(l, keccak256, { sortPairs: true });
     const buf2hex = x => '0x' + x.toString('hex')
 
-    // console.log(buf2hex(tree.getRoot()))
+    console.log(buf2hex(tree.getRoot()))
 
     const leaf = keccak256(blockchain.account);
     const proof = tree.getProof(leaf).map(x => buf2hex(x.data));

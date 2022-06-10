@@ -403,6 +403,13 @@
 		"type": "function"
 	},
 	{
+		"inputs": [],
+		"name": "withdrawMoney",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "address",
