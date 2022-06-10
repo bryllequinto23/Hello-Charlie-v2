@@ -174,6 +174,15 @@ function App() {
     WL: []
   });
 
+  const claimNFTs = () => {
+    console.log("Cost: ", totalCostWei);
+    console.log("Gas limit: ", totalGasLimit);
+    setErrorMsg(0);
+    setFeedback(`Minting your Charlie...`);
+    setClaimingNft(true);
+    checkWhitelistSale();
+  };
+
   const checkWhitelistSale = () => {
     // check value of whitelist sale (true or false)
     blockchain.smartContract.methods
@@ -181,25 +190,19 @@ function App() {
     .call()
     .then((isWhitelistSale) => {
       setWhitelistSale(isWhitelistSale);
-      // if (isWhitelistSale) {
-      //   whitelistMint();
-      // } else {
-      //   publicMint();
-      // }
+      if (isWhitelistSale) {
+        whitelistMint();
+      } else {
+        publicMint();
+      }
     });
   };
 
-  const claimNFTs = () => {
-    // let cost = CONFIG.WEI_COST; // 1 ETH OR MATIC = 1000000000000000000 WEI
+  const whitelistMint = () => {
     let cost = CONFIG.WEI_COST_WL;
     let gasLimit = CONFIG.GAS_LIMIT;
     let totalCostWei = String(cost * mintAmount);
     let totalGasLimit = String(gasLimit * mintAmount);
-    console.log("Cost: ", totalCostWei);
-    console.log("Gas limit: ", totalGasLimit);
-    setErrorMsg(0);
-    setFeedback(`Minting your Charlie...`);
-    setClaimingNft(true);
 
     const l = CONFIG.WL.map(x => keccak256(x));
     const tree = new MerkleTree(l, keccak256, { sortPairs: true });
@@ -237,10 +240,12 @@ function App() {
       });
   };
 
-  const whitelistMint = () => {
-  };
-
   const publicMint = () => {
+    let cost = CONFIG.WEI_COST; // 1 ETH OR MATIC = 1000000000000000000 WEI
+    let gasLimit = CONFIG.GAS_LIMIT;
+    let totalCostWei = String(cost * mintAmount);
+    let totalGasLimit = String(gasLimit * mintAmount);
+
     blockchain.smartContract.methods
       .publicMint(mintAmount)
       .send({
