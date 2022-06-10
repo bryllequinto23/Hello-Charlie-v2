@@ -175,8 +175,8 @@ function App() {
   });
 
   const claimNFTs = () => {
-    console.log("Cost: ", totalCostWei);
-    console.log("Gas limit: ", totalGasLimit);
+    // console.log("Cost: ", totalCostWei);
+    // console.log("Gas limit: ", totalGasLimit);
     setErrorMsg(0);
     setFeedback(`Minting your Charlie...`);
     setClaimingNft(true);
