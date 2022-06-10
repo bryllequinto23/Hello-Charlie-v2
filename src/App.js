@@ -189,7 +189,7 @@ function App() {
     .whiteListSale()
     .call()
     .then((isWhitelistSale) => {
-      setWhitelistSale(isWhitelistSale);
+      // setWhitelistSale(isWhitelistSale);
       if (isWhitelistSale) {
         whitelistMint();
       } else {
