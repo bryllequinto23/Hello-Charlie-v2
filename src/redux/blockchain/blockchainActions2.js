@@ -79,6 +79,7 @@ export const connect = () => {
     let provider = await web3Modal.connect();
     let web3 = new Web3(provider);
 
+    console.log(web3Modal)
     console.log(web3);
 
 
