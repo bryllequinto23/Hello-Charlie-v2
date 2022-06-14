@@ -1,6 +1,9 @@
 // constants
 import Web3EthContract from "web3-eth-contract";
 import Web3 from "web3";
+import WalletConnectProvider from "@walletconnect/web3-provider";
+import CoinbaseWalletSDK from "@coinbase/wallet-sdk";
+import Web3Modal from "web3modal"
 // log
 import { fetchData } from "../data/dataActions";
 
