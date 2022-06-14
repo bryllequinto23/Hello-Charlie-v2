@@ -6,6 +6,7 @@ import CoinbaseWalletSDK from "@coinbase/wallet-sdk";
 import Web3Modal from "web3modal"
 // log
 import { fetchData } from "../data/dataActions";
+import { ethers } from "ethers";
 
 const connectRequest = () => {
   return {
@@ -77,13 +78,12 @@ export const connect = () => {
     const CONFIG = await configResponse.json();
 
     let provider = await web3Modal.connect();
+    let web3Test = new ethers.providers.Web3Provider(provider);
     let web3 = new Web3(provider);
 
-    console.log(web3Modal.network)
-    console.log(web3Modal)
-    console.log(web3);
-
-
+    console.log(provider)
+    console.log(web3Test)
+    console.log(web3)
 
 
 
