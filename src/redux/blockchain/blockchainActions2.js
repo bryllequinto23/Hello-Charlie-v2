@@ -84,7 +84,10 @@ export const connect = () => {
     console.log(provider)
     console.log(web3Test)
     console.log(web3)
-
+    const acc = await web3.eth.getAccounts();
+    const net = await web3.eth.net.getId();
+    console.log(acc)
+    console.log(net)
 
 
     // const { ethereum } = window;
