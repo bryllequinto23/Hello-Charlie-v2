@@ -77,17 +77,41 @@ export const connect = () => {
     });
     const CONFIG = await configResponse.json();
 
-    let provider = await web3Modal.connect();
-    let web3Test = new ethers.providers.Web3Provider(provider);
-    let web3 = new Web3(provider);
-
-    console.log(provider)
-    console.log(web3Test)
-    console.log(web3)
-    const acc = await web3.eth.getAccounts();
-    const net = await web3.eth.net.getId();
-    console.log(acc)
-    console.log(net)
+    try {
+      let provider = await web3Modal.connect();
+      // let web3Test = new ethers.providers.Web3Provider(provider);
+      let web3 = new Web3(provider);
+  
+      const accounts = await web3.eth.getAccounts();
+      const networkId = await web3.eth.net.getId();
+  
+      if (networkId == CONFIG.NETWORK.ID) {
+        const SmartContractObj = new Web3EthContract(
+          abi,
+          CONFIG.CONTRACT_ADDRESS
+        );
+        dispatch(
+          connectSuccess({
+            account: accounts[0],
+            smartContract: SmartContractObj,
+            web3: web3,
+          })
+        );
+        // Add listeners start
+        provider.on("accountsChanged", (accounts) => {
+          dispatch(updateAccount(accounts[0]));
+        });
+        provider.on("chainChanged", () => {
+          window.location.reload();
+        });
+        // Add listeners end
+      } else {
+        dispatch(connectFailed(`Change network to ${CONFIG.NETWORK.NAME}.`));
+      }
+    } catch(e) {
+      dispatch(connectFailed("Something went wrong."));
+    }
+    
 
 
     // const { ethereum } = window;
