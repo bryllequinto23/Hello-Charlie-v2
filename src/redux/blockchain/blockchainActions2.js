@@ -86,7 +86,7 @@ export const connect = () => {
       const networkId = await web3.eth.net.getId();
   
       if (networkId == CONFIG.NETWORK.ID) {
-        const SmartContractObj = new Web3EthContract(
+        const SmartContractObj = new web3.eth.Contract(
           abi,
           CONFIG.CONTRACT_ADDRESS
         );
