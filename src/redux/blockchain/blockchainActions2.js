@@ -86,7 +86,7 @@ export const connect = () => {
       const accounts = await web3.eth.getAccounts();
       const networkId = await web3.eth.net.getId();
   
-      if (networkId == CONFIG.NETWORK.ID) {
+      // if (networkId == CONFIG.NETWORK.ID) {
         const SmartContractObj = new web3.eth.Contract(
           abi,
           CONFIG.CONTRACT_ADDRESS
@@ -106,9 +106,9 @@ export const connect = () => {
           window.location.reload();
         });
         // Add listeners end
-      } else {
-        dispatch(connectFailed(`Change network to ${CONFIG.NETWORK.NAME}.`));
-      }
+      // } else {
+      //   dispatch(connectFailed(`Change network to ${CONFIG.NETWORK.NAME}.`));
+      // }
     } catch(e) {
       dispatch(connectFailed("Something went wrong."));
     }
