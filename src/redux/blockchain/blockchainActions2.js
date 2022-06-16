@@ -62,7 +62,7 @@ const web3Modal = new Web3Modal({
 export const connect = () => {
   return async (dispatch) => {
     dispatch(connectRequest());
-    console.log('console3')
+    console.log('console4')
     const abiResponse = await fetch("/config/abi.json", {
       headers: {
         "Content-Type": "application/json",
