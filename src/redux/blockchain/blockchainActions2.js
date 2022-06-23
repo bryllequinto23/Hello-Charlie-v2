@@ -59,16 +59,9 @@ const web3Modal = new Web3Modal({
   providerOptions // required
 });
 
-export const checkState = () => {
-  // return (dispatch) => {
-    console.log('checking state!')
-  // }
-}
-
 export const connect = () => {
   return async (dispatch) => {
     dispatch(connectRequest());
-    console.log('console4')
     const abiResponse = await fetch("/config/abi.json", {
       headers: {
         "Content-Type": "application/json",
