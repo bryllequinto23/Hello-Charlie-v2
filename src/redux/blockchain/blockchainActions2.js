@@ -91,8 +91,13 @@ export const connect = () => {
           CONFIG.CONTRACT_ADDRESS
         );
 
-        const isPaused = await SmartContractObj.methods.pause().call();
+        const isPaused = await SmartContractObj.methods.pause().call(); // paused?
+        const isWLSale = await SmartContractObj.methods.whiteListSale().call(); // whitelist sale?
+        const isPSale = await SmartContractObj.methods.publicSale().call(); // public sale?
+
         console.log(isPaused)
+        console.log(isWLSale)
+        console.log(isPSale)
 
 
         dispatch(
