@@ -4,6 +4,9 @@ const initialState = {
   smartContract: null,
   web3: null,
   errorMsg: "",
+  paused: false,
+  wlSale: false,
+  pSale: false
 };
 
 const blockchainReducer = (state = initialState, action) => {

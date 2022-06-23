@@ -90,6 +90,11 @@ export const connect = () => {
           abi,
           CONFIG.CONTRACT_ADDRESS
         );
+
+        const isPaused = SmartContractObj.methods.pause().call();
+        console.log(isPaused)
+
+
         dispatch(
           connectSuccess({
             account: accounts[0],
