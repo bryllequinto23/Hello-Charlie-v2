@@ -35,7 +35,7 @@ export const fetchData = () => {
       //   .call();
       let totalPublic = await store
         .getState()
-        .blockchain.smartContract.methods.totalPublicMint(blockchain.account)
+        .blockchain.smartContract.methods.totalPublicMint(store.getState().blockchain.account)
         .call();
       
         console.log(totalPublic)
