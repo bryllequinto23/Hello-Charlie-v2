@@ -59,6 +59,10 @@ const web3Modal = new Web3Modal({
   providerOptions // required
 });
 
+export const checkState = () => {
+  console.log('checking state!')
+}
+
 export const connect = () => {
   return async (dispatch) => {
     dispatch(connectRequest());

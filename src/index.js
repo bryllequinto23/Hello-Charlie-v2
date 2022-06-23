@@ -5,6 +5,9 @@ import reportWebVitals from "./reportWebVitals";
 import store from "./redux/store";
 import { Provider } from "react-redux";
 import "./styles/reset.css";
+import { checkState } from "./redux/blockchain/blockchainActions2";
+
+dispatch(checkState());
 
 ReactDOM.render(
   <Provider store={store}>
