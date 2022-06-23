@@ -7,7 +7,7 @@ import { Provider } from "react-redux";
 import "./styles/reset.css";
 import { checkState } from "./redux/blockchain/blockchainActions2";
 
-dispatch(checkState());
+checkState();
 
 ReactDOM.render(
   <Provider store={store}>

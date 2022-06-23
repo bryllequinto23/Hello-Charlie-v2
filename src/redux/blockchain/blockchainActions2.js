@@ -60,7 +60,9 @@ const web3Modal = new Web3Modal({
 });
 
 export const checkState = () => {
-  console.log('checking state!')
+  // return (dispatch) => {
+    console.log('checking state!')
+  // }
 }
 
 export const connect = () => {
