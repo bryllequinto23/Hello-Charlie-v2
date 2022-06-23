@@ -91,7 +91,7 @@ export const connect = () => {
           CONFIG.CONTRACT_ADDRESS
         );
 
-        const isPaused = SmartContractObj.methods.pause().call();
+        const isPaused = await SmartContractObj.methods.pause().call();
         console.log(isPaused)
 
 
