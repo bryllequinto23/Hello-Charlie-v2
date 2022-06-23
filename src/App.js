@@ -414,6 +414,10 @@ function App() {
                   </s.Container>
                 ) : (
                   <>
+                    { blockchain.paused ? "Minting paused" : 
+                      !blockchain.wlSale ? "WL sale paused" : 
+                      !blockchain.pSale ? "Public sale paused" : 
+                      "paused" }
                     { feedback !== "" ? (
                       <>
                         <s.TextDescription style={{

@@ -105,6 +105,9 @@ export const connect = () => {
             account: accounts[0],
             smartContract: SmartContractObj,
             web3: web3,
+            paused: isPaused,
+            wlSale: isWLSale,
+            pSale: isPSale
           })
         );
         // Add listeners start
