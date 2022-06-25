@@ -301,10 +301,22 @@ function App() {
     if (blockchain.account !== "" && blockchain.smartContract !== null) {
       setConnected(true);
       dispatch(fetchData(blockchain.account));
+      if (blockchain.wlSale) {
+        checkEligibility();
+      }
     } else {
       setConnected(false);
     }
   };
+
+  const checkEligibility = () => {
+    console.log(blockchain.account)
+    if (CONFIG.WL.includes(blockchain.account)) {
+      console.log('whitelisted')
+    } else {
+      console.log('not whitelisted')
+    }
+  }
 
   const getConfig = async () => {
     const configResponse = await fetch("/config/config.json", {
@@ -316,14 +328,6 @@ function App() {
     const config = await configResponse.json();
     SET_CONFIG(config);
   };
-
-  // const connectWallet = async () => {
-  //   console.log('connecting')
-  //   await dispatch(connect());
-  //   console.log('done connecting')
-  //   console.log(blockchain.account)
-  //   console.log(blockchain.smartContract)
-  // }
 
   useEffect(() => {
     getConfig();
@@ -388,7 +392,7 @@ function App() {
                   </>
                 ) : null }
                 <s.SpacerSmall />
-                { blockchain.account === "" || blockchain.smartContract === null ? (
+                { !isConnected ? (
                   <s.Container ai={"center"} jc={"center"}>
                     {/* <s.TextDescription style={{
                       textAlign: "center",
