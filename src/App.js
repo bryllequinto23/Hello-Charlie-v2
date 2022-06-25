@@ -378,7 +378,7 @@ function App() {
                 { isConnected ? (
                   <>
                     <s.TextTitle style={{ textAlign: "center", color: "var(--primary-text)" }}>
-                      1 Charlie = { isWhitelistSale ? CONFIG.DISPLAY_COST : CONFIG.DISPLAY_COST}{" "}
+                      1 Charlie = { blockchain.wlSale ? CONFIG.DISPLAY_COST : CONFIG.DISPLAY_COST}{" "}
                       {CONFIG.NETWORK.SYMBOL}.
                     </s.TextTitle>
                     <s.SpacerXSmall />
