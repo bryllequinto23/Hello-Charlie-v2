@@ -154,6 +154,7 @@ function App() {
   const [mintAmount, setMintAmount] = useState(1);
   const [isErrorMsg, setErrorMsg] = useState(0);
   const [isConnected, setConnected] = useState(false);
+  const [isEligible, setEligibile] = useState(false);
   const [CONFIG, SET_CONFIG] = useState({
     CONTRACT_ADDRESS: "",
     SCAN_LINK: "",
@@ -312,9 +313,9 @@ function App() {
   const checkEligibility = () => {
     console.log(blockchain.account)
     if (CONFIG.WL.includes(blockchain.account)) {
-      console.log('whitelisted')
+      setEligibile(true);
     } else {
-      console.log('not whitelisted')
+      setEligibile(false);
     }
   }
 
@@ -340,9 +341,21 @@ function App() {
 
   return (
     <s.Screen2>
-      {/* <ResponsiveWrapper flex={2}> */}
-        <s.Container2 flex={2} image={CONFIG.SHOW_BACKGROUND ? "/config/images/bg6.png" : null}>
-        </s.Container2>
+      <s.Container2 flex={2} image={CONFIG.SHOW_BACKGROUND ? "/config/images/bg6.png" : null}>
+      </s.Container2>
+      { isConnected && (blockchain.paused || !isEligible) ? (
+        <s.Container3 flex={2}>
+          <s.Container flex={2} jc={"center"} ai={"center"}>
+            <s.TextTitle style={{
+              textAlign: "center",
+              fontSize: 50,
+              fontWeight: "bold",
+              color: "var(--primary-text)",}}>
+              { blockchain.paused ? "Minting is not allowed at the moment" : "You are not whitelisted." }
+            </s.TextTitle>
+          </s.Container>
+        </s.Container3>
+      ) : (
         <s.Container3 flex={2}>
           <s.Container flex={2} jc={"center"} ai={"center"}>
             <s.TextTitle style={{
@@ -477,11 +490,10 @@ function App() {
                 )}
               </>
             )}
-            {/* <s.SpacerMedium /> */}
           </s.Container>
-          {/* <s.SpacerLarge /> */}
         </s.Container3>
-      {/* </ResponsiveWrapper> */}
+      )}
+      
     </s.Screen2>
   )
 
