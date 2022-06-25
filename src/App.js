@@ -316,8 +316,10 @@ function App() {
 
   const checkIfConnected = () => {
     if (blockchain.account !== "" && blockchain.smartContract !== null) {
+      console.log('connected')
       setConnected(true);
     } else {
+      console.log('not connected')
       setConnected(false);
     }
   }
