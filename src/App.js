@@ -312,7 +312,9 @@ function App() {
 
   const checkEligibility = () => {
     console.log(blockchain.account)
-    if (CONFIG.WL.includes(blockchain.account)) {
+    const isWl = CONFIG.WL.map(elem => elem.toLowerCase()).includes(blockchain.account);
+
+    if (isWl) {
       setEligibile(true);
     } else {
       setEligibile(false);
