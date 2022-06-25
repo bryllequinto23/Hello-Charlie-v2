@@ -340,6 +340,7 @@ function App() {
   }, []);
 
   useEffect(() => {
+    console.log('use effect!')
     getData();
   }, [blockchain.account]);
 
