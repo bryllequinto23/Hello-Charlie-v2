@@ -326,6 +326,14 @@ function App() {
     }
   }
 
+  const connectWallet = async () => {
+    console.log('connecting')
+    await dispatch(connect());
+    console.log('done connecting')
+    console.log(blockchain.account)
+    console.log(blockchain.smartContract)
+  }
+
   useEffect(() => {
     getConfig();
   }, []);
@@ -399,9 +407,9 @@ function App() {
                     <s.SpacerSmall />
                     <StyledButton2 onClick={(e) => {
                       e.preventDefault();
+                      connectWallet();
                       dispatch(connect());
-                      getData();
-                      checkIfConnected();}}>
+                      getData();}}>
                       CONNECT
                     </StyledButton2>
                     { blockchain.errorMsg !== "" ? (
