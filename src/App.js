@@ -408,7 +408,7 @@ function App() {
                     <StyledButton2 onClick={(e) => {
                       e.preventDefault();
                       connectWallet();
-                      dispatch(connect());
+                      // dispatch(connect());
                       getData();}}>
                       CONNECT
                     </StyledButton2>
