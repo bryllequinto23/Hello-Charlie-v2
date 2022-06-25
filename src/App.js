@@ -302,6 +302,9 @@ function App() {
     if (blockchain.account !== "" && blockchain.smartContract !== null) {
       setConnected(true);
       dispatch(fetchData(blockchain.account));
+      console.log(blockchain.paused)
+      console.log(blockchain.wlSale)
+      console.log(blockchain.pSale)
       if (blockchain.wlSale) {
         checkEligibility();
       }
