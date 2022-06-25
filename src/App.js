@@ -345,7 +345,7 @@ function App() {
     <s.Screen2>
       <s.Container2 flex={2} image={CONFIG.SHOW_BACKGROUND ? "/config/images/bg6.png" : null}>
       </s.Container2>
-      { isConnected && (blockchain.paused || !isEligible) ? (
+      { isConnected && (blockchain.paused || !isEligible || (!blockchain.paused && !blockchain.wlSale && !blockchain.pSale)) ? (
         <s.Container3 flex={2}>
           <s.Container flex={2} jc={"center"} ai={"center"}>
             <s.TextTitle style={{
@@ -353,7 +353,8 @@ function App() {
               fontSize: 50,
               fontWeight: "bold",
               color: "var(--primary-text)",}}>
-              { blockchain.paused ? "Minting is not allowed at the moment" : "You are not whitelisted." }
+              { blockchain.paused || (!blockchain.paused && !blockchain.wlSale && !blockchain.pSale) ? 
+                "Minting is not allowed at the moment" : "You are not whitelisted." }
             </s.TextTitle>
           </s.Container>
         </s.Container3>
