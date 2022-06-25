@@ -305,6 +305,7 @@ function App() {
       console.log(blockchain.paused)
       console.log(blockchain.wlSale)
       console.log(blockchain.pSale)
+      console.log(!blockchain.paused && !blockchain.wlSale && !blockchain.pSale)
       if (blockchain.wlSale) {
         checkEligibility();
       }
