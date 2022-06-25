@@ -302,10 +302,6 @@ function App() {
     if (blockchain.account !== "" && blockchain.smartContract !== null) {
       setConnected(true);
       dispatch(fetchData(blockchain.account));
-      console.log(blockchain.paused)
-      console.log(blockchain.wlSale)
-      console.log(blockchain.pSale)
-      console.log(!blockchain.paused && !blockchain.wlSale && !blockchain.pSale)
       if (blockchain.wlSale) {
         checkEligibility();
       }
@@ -349,7 +345,7 @@ function App() {
     <s.Screen2>
       <s.Container2 flex={2} image={CONFIG.SHOW_BACKGROUND ? "/config/images/bg6.png" : null}>
       </s.Container2>
-      { isConnected && (blockchain.paused || !isEligible || (!blockchain.paused && !blockchain.wlSale && !blockchain.pSale)) ? (
+      { isConnected && (blockchain.paused || (blockchain.wlSale && !isEligible) || (!blockchain.paused && !blockchain.wlSale && !blockchain.pSale)) ? (
         <s.Container3 flex={2}>
           <s.Container flex={2} jc={"center"} ai={"center"}>
             <s.TextTitle style={{
