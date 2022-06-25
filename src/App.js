@@ -299,8 +299,10 @@ function App() {
 
   const getData = () => {
     if (blockchain.account !== "" && blockchain.smartContract !== null) {
-      console.log('get data')
+      setConnected(true);
       dispatch(fetchData(blockchain.account));
+    } else {
+      setConnected(false);
     }
   };
 
@@ -315,18 +317,6 @@ function App() {
     SET_CONFIG(config);
   };
 
-  const checkIfConnected = () => {
-    console.log(blockchain.account)
-    console.log(blockchain.smartContract)
-    if (blockchain.account !== "" && blockchain.smartContract !== null) {
-      console.log('connected')
-      setConnected(true);
-    } else {
-      console.log('not connected')
-      setConnected(false);
-    }
-  }
-
   // const connectWallet = async () => {
   //   console.log('connecting')
   //   await dispatch(connect());
@@ -340,7 +330,6 @@ function App() {
   }, []);
 
   useEffect(() => {
-    console.log('use effect!')
     getData();
   }, [blockchain.account]);
 
