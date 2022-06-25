@@ -390,13 +390,13 @@ function App() {
                   color: "var(--primary-text)",}}>
                   {data.totalSupply} / {CONFIG.MAX_SUPPLY}
                 </s.TextTitle>
-                <s.TextDescription style={{
+                {/* <s.TextDescription style={{
                   textAlign: "center",
                   color: "var(--accent-text)",}}>
                   <StyledLink target={"_blank"} href={CONFIG.SCAN_LINK}>
                     {truncate(CONFIG.CONTRACT_ADDRESS, 15)}
                   </StyledLink>
-                </s.TextDescription>
+                </s.TextDescription> */}
                 <s.SpacerSmall />
                 { Number(data.totalSupply) >= CONFIG.MAX_SUPPLY ? (
                   <>
@@ -417,10 +417,10 @@ function App() {
                         1 Charlie = { blockchain.wlSale ? CONFIG.DISPLAY_COST_WL : CONFIG.DISPLAY_COST}{" "}
                         {CONFIG.NETWORK.SYMBOL}.
                     </s.TextTitle>
-                    <s.SpacerXSmall />
+                    {/* <s.SpacerXSmall />
                     <s.TextDescription style={{ textAlign: "center", color: "var(--accent-text)" }}>
                       Excluding gas fees.
-                    </s.TextDescription>
+                    </s.TextDescription> */}
                     <s.SpacerSmall />
                     { feedback !== "" ? (
                       <>
