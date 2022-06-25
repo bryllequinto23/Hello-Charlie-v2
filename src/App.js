@@ -360,86 +360,68 @@ function App() {
       ) : (
         <s.Container3 flex={2}>
           <s.Container flex={2} jc={"center"} ai={"center"}>
-            <s.TextTitle style={{
-              textAlign: "center",
-              fontSize: 50,
-              fontWeight: "bold",
-              color: "var(--primary-text)",}}>
-              {data.totalSupply} / {CONFIG.MAX_SUPPLY}
-            </s.TextTitle>
-            <s.TextDescription style={{
-              textAlign: "center",
-              color: "var(--accent-text)",}}>
-              <StyledLink target={"_blank"} href={CONFIG.SCAN_LINK}>
-                {truncate(CONFIG.CONTRACT_ADDRESS, 15)}
-              </StyledLink>
-            </s.TextDescription>
-            <s.SpacerSmall />
-            { Number(data.totalSupply) >= CONFIG.MAX_SUPPLY ? (
-              <>
-                <s.TextTitle
-                  style={{ textAlign: "center", color: "var(--accent-text)" }}
-                >
-                  The sale has ended.
-                </s.TextTitle>
-                <s.TextDescription
-                  style={{ textAlign: "center", color: "var(--accent-text)" }}
-                >
-                  You can still find {CONFIG.NFT_NAME} on
-                </s.TextDescription>
+            { !isConnected ? (
+              <s.Container ai={"center"} jc={"center"}>
                 <s.SpacerSmall />
-                <StyledLink target={"_blank"} href={CONFIG.MARKETPLACE_LINK}>
-                  {CONFIG.MARKETPLACE}
-                </StyledLink>
-              </>
+                <StyledButton2 onClick={(e) => {
+                  e.preventDefault();
+                  dispatch(connect());
+                  getData();}}>
+                  CONNECT
+                </StyledButton2>
+                { blockchain.errorMsg !== "" ? (
+                  <>
+                    <s.SpacerSmall />
+                    <s.TextDescription style={{
+                      textAlign: "center",
+                      color: "var(--err-text)",
+                      fontWeight: "bold"}}>
+                      {blockchain.errorMsg}
+                    </s.TextDescription>
+                  </>
+                ) : null }
+              </s.Container>
             ) : (
               <>
-                { isConnected ? (
+                <s.TextTitle style={{
+                  textAlign: "center",
+                  fontSize: 50,
+                  fontWeight: "bold",
+                  color: "var(--primary-text)",}}>
+                  {data.totalSupply} / {CONFIG.MAX_SUPPLY}
+                </s.TextTitle>
+                <s.TextDescription style={{
+                  textAlign: "center",
+                  color: "var(--accent-text)",}}>
+                  <StyledLink target={"_blank"} href={CONFIG.SCAN_LINK}>
+                    {truncate(CONFIG.CONTRACT_ADDRESS, 15)}
+                  </StyledLink>
+                </s.TextDescription>
+                <s.SpacerSmall />
+                { Number(data.totalSupply) >= CONFIG.MAX_SUPPLY ? (
+                  <>
+                    <s.TextTitle style={{ textAlign: "center", color: "var(--accent-text)" }}>
+                      The sale has ended.
+                    </s.TextTitle>
+                    <s.TextDescription style={{ textAlign: "center", color: "var(--accent-text)" }}>
+                      You can still find {CONFIG.NFT_NAME} on
+                    </s.TextDescription>
+                    <s.SpacerSmall />
+                    <StyledLink target={"_blank"} href={CONFIG.MARKETPLACE_LINK}>
+                      {CONFIG.MARKETPLACE}
+                    </StyledLink>
+                  </>
+                ) : (
                   <>
                     <s.TextTitle style={{ textAlign: "center", color: "var(--primary-text)" }}>
-                      1 Charlie = { blockchain.wlSale ? CONFIG.DISPLAY_COST_WL : CONFIG.DISPLAY_COST}{" "}
-                      {CONFIG.NETWORK.SYMBOL}.
+                        1 Charlie = { blockchain.wlSale ? CONFIG.DISPLAY_COST_WL : CONFIG.DISPLAY_COST}{" "}
+                        {CONFIG.NETWORK.SYMBOL}.
                     </s.TextTitle>
                     <s.SpacerXSmall />
                     <s.TextDescription style={{ textAlign: "center", color: "var(--accent-text)" }}>
                       Excluding gas fees.
                     </s.TextDescription>
-                  </>
-                ) : null }
-                <s.SpacerSmall />
-                { !isConnected ? (
-                  <s.Container ai={"center"} jc={"center"}>
-                    {/* <s.TextDescription style={{
-                      textAlign: "center",
-                      color: "var(--accent-text)"}}>
-                      Connect to the {CONFIG.NETWORK.NAME} network
-                    </s.TextDescription> */}
                     <s.SpacerSmall />
-                    <StyledButton2 onClick={(e) => {
-                      e.preventDefault();
-                      // connectWallet();
-                      dispatch(connect());
-                      getData();}}>
-                      CONNECT
-                    </StyledButton2>
-                    { blockchain.errorMsg !== "" ? (
-                      <>
-                        <s.SpacerSmall />
-                        <s.TextDescription style={{
-                          textAlign: "center",
-                          color: "var(--err-text)",
-                          fontWeight: "bold"}}>
-                          {blockchain.errorMsg}
-                        </s.TextDescription>
-                      </>
-                    ) : null }
-                  </s.Container>
-                ) : (
-                  <>
-                    { blockchain.paused ? "Minting paused" : 
-                      !blockchain.wlSale ? "WL sale paused" : 
-                      !blockchain.pSale ? "Public sale paused" : 
-                      "paused" }
                     { feedback !== "" ? (
                       <>
                         <s.TextDescription style={{
@@ -495,7 +477,6 @@ function App() {
           </s.Container>
         </s.Container3>
       )}
-      
     </s.Screen2>
   )
 
