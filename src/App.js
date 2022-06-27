@@ -365,10 +365,6 @@ function App() {
       if (blockchain.wlSale) {
         checkEligibility();
       }
-
-      console.log(typeof(data.totalSupply))
-      console.log(typeof(data.wlTotal))
-      console.log(typeof(data.pubTotal))
     } else {
       setConnected(false);
     }
