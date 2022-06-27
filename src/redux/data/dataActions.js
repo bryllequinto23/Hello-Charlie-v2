@@ -32,20 +32,22 @@ export const fetchData = () => {
         .blockchain.smartContract.methods.totalSupply()
         .call();
 
-      // let totalPublic = await store
-      //   .getState()
-      //   .blockchain.smartContract.methods.totalPublicMint(acc)
-      //   .call();
+      let totalPublic = await store
+        .getState()
+        .blockchain.smartContract.methods.totalPublicMint(acc)
+        .call();
       
-      // let totalWL = await store
-      //   .getState()
-      //   .blockchain.smartContract.methods.totalWhitelistMint(acc)
-      //   .call();
+      let totalWL = await store
+        .getState()
+        .blockchain.smartContract.methods.totalWhitelistMint(acc)
+        .call();
 
       // console.log(totalPublic)
       dispatch(
         fetchDataSuccess({
           totalSupply,
+          totalPublic,
+          totalWL
           // cost,
         })
       );

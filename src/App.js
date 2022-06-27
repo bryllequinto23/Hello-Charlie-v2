@@ -166,8 +166,12 @@ function App() {
     NFT_NAME: "",
     SYMBOL: "",
     MAX_SUPPLY: 1,
+    MAX_MINT_WL: 0,
+    MAX_MINT_PUB: 0,
     WEI_COST: 0,
+    WEI_COST_WL: 0,
     DISPLAY_COST: 0,
+    DISPLAY_COST_WL: 0,
     GAS_LIMIT: 0,
     MARKETPLACE: "",
     MARKETPLACE_LINK: "",
@@ -181,8 +185,21 @@ function App() {
     setErrorMsg(0);
     setFeedback(`Minting your Charlie...`);
     setClaimingNft(true);
-    checkWhitelistSale();
+    checkStatus();
   };
+
+  const checkStatus = () => {
+    blockchain.smartContract.methods
+    .pause()
+    .call()
+    .then((paused) => {
+      if (paused) {
+        alert("Minting is paused");
+      } else {
+        checkWhitelistSale();
+      }
+    });
+  }
 
   const checkWhitelistSale = () => {
     // check value of whitelist sale (true or false)
@@ -190,14 +207,55 @@ function App() {
     .whiteListSale()
     .call()
     .then((isWhitelistSale) => {
-      // setWhitelistSale(isWhitelistSale);
       if (isWhitelistSale) {
-        whitelistMint();
+        verifyWLSale();
       } else {
-        publicMint();
+        verifyPSale();
       }
     });
   };
+
+  const verifyWLSale = () => {
+    const totSupply = data.totalSupply;
+    const wlTotal = data.wlTotal;
+    const maxWl = CONFIG.MAX_MINT_WL;
+    const maxSupply = CONFIG.MAX_SUPPLY;
+
+    const newSupply = totSupply + mintAmount;
+    const newWlTotal = wlTotal + mintAmount;
+
+    if (newSupply > maxSupply) {
+      alert("Beyond max supply.")
+    } else if (newWlTotal > maxWl) {
+      alert("You have reached the maximum amount of mints.")
+    } else {
+      checkEligibility();
+      
+      if (!isEligible) {
+        alert("You are not whitelisted.")
+      } else {
+        whitelistMint();
+      }
+    }
+  }
+
+  const verifyPSale = () => {
+    const totSupply = data.totalSupply;
+    const pubTotal = data.pubTotal;
+    const maxPub = CONFIG.MAX_MINT_PUB;
+    const maxSupply = CONFIG.MAX_SUPPLY;
+
+    const newSupply = totSupply + mintAmount;
+    const newPubTotal = pubTotal + mintAmount;
+
+    if (newSupply > maxSupply) {
+      alert("Beyond max supply.")
+    } else if (newPubTotal > maxPub) {
+      alert("You have reached the maximum amount of mints.")
+    } else {
+      publicMint();
+    }
+  }
 
   const whitelistMint = () => {
     let cost = CONFIG.WEI_COST_WL;
@@ -289,8 +347,10 @@ function App() {
 
     if (tempTotal === CONFIG.MAX_SUPPLY) {
       newMintAmount = mintAmount;
-    } else if (mintAmount === 30) {
-      newMintAmount = 30;
+    } else if (blockchain.wlSale && (data.wlTotal + mintAmount) > MAX_MINT_WL) {
+      newMintAmount = mintAmount;
+    } else if (blockchain.pSale && (data.pubTotal + mintAmount) > MAX_MINT_PUB) {
+      newMintAmount = mintAmount;
     } else {
       newMintAmount = mintAmount + 1;
     }
@@ -305,6 +365,10 @@ function App() {
       if (blockchain.wlSale) {
         checkEligibility();
       }
+
+      console.log(typeof(data.totalSupply))
+      console.log(typeof(data.wlTotal))
+      console.log(typeof(data.pubTotal))
     } else {
       setConnected(false);
     }
