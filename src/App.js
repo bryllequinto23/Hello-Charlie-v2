@@ -167,16 +167,20 @@ function App() {
     SYMBOL: "",
     MAX_SUPPLY: 1,
     MAX_MINT_WL: 0,
+    MAX_MINT_OG: 0,
     MAX_MINT_PUB: 0,
     WEI_COST: 0,
     WEI_COST_WL: 0,
+    WEI_COST_OG: 0,
     DISPLAY_COST: 0,
     DISPLAY_COST_WL: 0,
+    DISPLAY_COST_OG: 0,
     GAS_LIMIT: 0,
     MARKETPLACE: "",
     MARKETPLACE_LINK: "",
     SHOW_BACKGROUND: false,
-    WL: []
+    WL: [],
+    OG: []
   });
 
   const claimNFTs = () => {

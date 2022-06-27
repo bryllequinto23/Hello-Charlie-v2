@@ -3,6 +3,7 @@ const initialState = {
   totalSupply: 0,
   cost: 0,
   wlTotal: 0,
+  ogTotal: 0,
   pubTotal: 0,
   error: false,
   errorMsg: "",
