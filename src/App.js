@@ -450,7 +450,7 @@ function App() {
               <>
                 <StyledButton2 onClick={(e) => {
                   e.preventDefault();
-                  dispatch(disconnect());}}>
+                  disconnect();}}>
                   DISCONNECT
                 </StyledButton2>
                 <s.TextTitle style={{
