@@ -172,3 +172,7 @@ export const updateAccount = (account) => {
     dispatch(fetchData(account));
   };
 };
+
+export const disconnect = () => {
+  console.log('disconnect')
+}

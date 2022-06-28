@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { connect } from "./redux/blockchain/blockchainActions2";
+import { connect, disconnect } from "./redux/blockchain/blockchainActions2";
 import { fetchData } from "./redux/data/dataActions";
 import * as s from "./styles/globalStyles";
 import styled from "styled-components";
@@ -448,6 +448,11 @@ function App() {
               </s.Container>
             ) : (
               <>
+                <StyledButton2 onClick={(e) => {
+                  e.preventDefault();
+                  dispatch(disconnect());}}>
+                  DISCONNECT
+                </StyledButton2>
                 <s.TextTitle style={{
                   textAlign: "center",
                   fontSize: 50,
