@@ -35,12 +35,6 @@ const updateAccountRequest = (payload) => {
   };
 };
 
-const disconnectRequest = () => {
-  return {
-    type: "DISCONNECT"
-  };
-}
-
 const providerOptions = {
   walletconnect: {
     package: WalletConnectProvider, // required
@@ -178,7 +172,3 @@ export const updateAccount = (account) => {
     dispatch(fetchData(account));
   };
 };
-
-// export const disconnect = () => {
-//   window.location.reload();
-// }
