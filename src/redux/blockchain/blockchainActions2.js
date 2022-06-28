@@ -180,8 +180,5 @@ export const updateAccount = (account) => {
 };
 
 export const disconnect = () => {
-  return async (dispatch) => {
-    dispatch(disconnectRequest());
-    window.location.reload();
-  }
+  window.location.reload();
 }
