@@ -179,6 +179,6 @@ export const updateAccount = (account) => {
   };
 };
 
-export const disconnect = () => {
-  window.location.reload();
-}
+// export const disconnect = () => {
+//   window.location.reload();
+// }

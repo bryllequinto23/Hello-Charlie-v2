@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { connect, disconnect } from "./redux/blockchain/blockchainActions2";
+import { connect } from "./redux/blockchain/blockchainActions2";
 import { fetchData } from "./redux/data/dataActions";
 import * as s from "./styles/globalStyles";
 import styled from "styled-components";
@@ -395,6 +395,10 @@ function App() {
     const config = await configResponse.json();
     SET_CONFIG(config);
   };
+
+  const disconnect = () => {
+    window.location.reload();
+  }
 
   useEffect(() => {
     getConfig();
