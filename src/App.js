@@ -453,11 +453,11 @@ function App() {
               </s.Container>
             ) : (
               <>
-                <StyledButton2 onClick={(e) => {
+                {/* <StyledButton2 onClick={(e) => {
                   e.preventDefault();
                   disconnect();}}>
                   DISCONNECT
-                </StyledButton2>
+                </StyledButton2> */}
                 <s.TextTitle style={{
                   textAlign: "center",
                   fontSize: 50,
@@ -547,6 +547,12 @@ function App() {
                     </s.Container>
                   </>
                 )}
+                <s.SpacerSmall />
+                <s.TextDescription onClick={(e) => {
+                  e.preventDefault();
+                  disconnect();}}>
+                  DISCONNECT
+                </s.TextDescription>
               </>
             )}
           </s.Container>
