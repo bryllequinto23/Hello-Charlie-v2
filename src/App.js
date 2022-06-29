@@ -397,6 +397,7 @@ function App() {
   };
 
   const disconnect = () => {
+    console.log('disconnect')
     window.location.reload();
   }
 
