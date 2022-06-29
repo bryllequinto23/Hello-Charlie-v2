@@ -548,11 +548,11 @@ function App() {
                   </>
                 )}
                 <s.SpacerSmall />
-                <s.TextDescription onClick={(e) => {
+                <s.TextDescription2 onClick={(e) => {
                   e.preventDefault();
                   disconnect();}}>
                   DISCONNECT
-                </s.TextDescription>
+                </s.TextDescription2>
               </>
             )}
           </s.Container>
