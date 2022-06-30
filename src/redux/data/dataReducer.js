@@ -25,6 +25,7 @@ const dataReducer = (state = initialState, action) => {
         totalSupply: action.payload.totalSupply,
         pubTotal: action.payload.totalPublic,
         wlTotal: action.payload.totalWL,
+        ogTotal: action.payload.totalOG,
         // cost: action.payload.cost,
         error: false,
         errorMsg: "",

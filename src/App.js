@@ -155,6 +155,7 @@ function App() {
   const [isErrorMsg, setErrorMsg] = useState(0);
   const [isConnected, setConnected] = useState(false);
   const [isEligible, setEligibile] = useState(false);
+  const [wlType, setWlType] = useState(0);
   const [CONFIG, SET_CONFIG] = useState({
     CONTRACT_ADDRESS: "",
     SCAN_LINK: "",
@@ -236,9 +237,15 @@ function App() {
       checkEligibility();
       
       if (!isEligible) {
-        alert("You are not whitelisted.")
+        alert("You are not og/whitelisted.")
       } else {
-        whitelistMint();
+        if (wlType === 1) {
+          console.log('OG MINT')
+          ogMint();
+        } else {
+          console.log('WL MINT')
+          whitelistMint();
+        }
       }
     }
   }
@@ -259,6 +266,48 @@ function App() {
     } else {
       publicMint();
     }
+  }
+
+  const ogMint = () => {
+    let cost = CONFIG.WEI_COST_WL;
+    let gasLimit = CONFIG.GAS_LIMIT;
+    let totalCostWei = String(cost * mintAmount);
+    let totalGasLimit = String(gasLimit * mintAmount);
+
+    const l = CONFIG.OG.map(x => keccak256(x));
+    const tree = new MerkleTree(l, keccak256, { sortPairs: true });
+    const buf2hex = x => '0x' + x.toString('hex')
+
+    console.log(buf2hex(tree.getRoot()))
+
+    const leaf = keccak256(blockchain.account);
+    const proof = tree.getProof(leaf).map(x => buf2hex(x.data));
+
+    blockchain.smartContract.methods
+      .ogMint(proof, mintAmount)
+      .send({
+        gasLimit: String(totalGasLimit),
+        to: CONFIG.CONTRACT_ADDRESS,
+        from: blockchain.account,
+        value: totalCostWei,
+      })
+      .once("error", (err) => {
+        console.log(err);
+        setErrorMsg(1);
+        setFeedback("Sorry, something went wrong please try again later.");
+        setClaimingNft(false);
+        setTimeout(() => setFeedback(``), 4000);
+      })
+      .then((receipt) => {
+        console.log(receipt);
+        setErrorMsg(0);
+        setFeedback(
+          `Your Charlie has been minted. Visit Opensea.io to view it.`
+        );
+        setClaimingNft(false);
+        dispatch(fetchData(blockchain.account));
+        setTimeout(() => setFeedback(``), 4000);
+      });
   }
 
   const whitelistMint = () => {
@@ -377,8 +426,12 @@ function App() {
   const checkEligibility = () => {
     console.log(blockchain.account)
     const isWl = CONFIG.WL.map(elem => elem.toLowerCase()).includes(blockchain.account.toLowerCase());
+    const isOG = CONFIG.OG.map(elem => elem.toLowerCase()).includes(blockchain.account.toLowerCase());
 
-    if (isWl) {
+    if (isWl || isOG) {
+      const ogType = isOG ? 1 : 2;
+
+      setWlType(ogType);
       setEligibile(true);
     } else {
       setEligibile(false);
@@ -423,7 +476,7 @@ function App() {
               fontWeight: "bold",
               color: "var(--primary-text)",}}>
               { blockchain.paused || (!blockchain.paused && !blockchain.wlSale && !blockchain.pSale) ? 
-                "Minting is not allowed at the moment" : "You are not whitelisted." }
+                "Minting is not allowed at the moment" : "You are not OG/whitelisted." }
             </s.TextTitle>
           </s.Container>
         </s.Container3>
