@@ -400,9 +400,11 @@ function App() {
 
     if (tempTotal === CONFIG.MAX_SUPPLY) {
       newMintAmount = mintAmount;
-    } else if (blockchain.wlSale && (data.wlTotal + mintAmount) > MAX_MINT_WL) {
+    } else if (blockchain.wlSale && wlType === 1 && (mintAmount > CONFIG.MAX_MINT_OG)) {
       newMintAmount = mintAmount;
-    } else if (blockchain.pSale && (data.pubTotal + mintAmount) > MAX_MINT_PUB) {
+    } else if (blockchain.wlSale && wlType === 2 && (mintAmount > CONFIG.MAX_MINT_WL)) {
+      newMintAmount = mintAmount;
+    } else if (blockchain.pSale && (mintAmount > CONFIG.MAX_MINT_PUB)) {
       newMintAmount = mintAmount;
     } else {
       newMintAmount = mintAmount + 1;
