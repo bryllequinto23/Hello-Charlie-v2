@@ -430,7 +430,7 @@ function App() {
 
       let tempAcc = blockchain.account;
       
-      tempAcc = tempAcc.substr(0,5) + '...' + tempAcc.substr(tempAcc.length - 35, tempAcc.length);
+      tempAcc = tempAcc.substr(0,6) + '...' + tempAcc.substr(tempAcc.length - 7, tempAcc.length);
       setWalletDisplay(tempAcc);
     } else {
       setConnected(false);
