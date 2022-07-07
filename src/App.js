@@ -156,6 +156,7 @@ function App() {
   const [isConnected, setConnected] = useState(false);
   const [isEligible, setEligibile] = useState(false);
   const [wlType, setWlType] = useState(0);
+  const [walletDisplay, setWalletDisplay] = useState('');
   const [CONFIG, SET_CONFIG] = useState({
     CONTRACT_ADDRESS: "",
     SCAN_LINK: "",
@@ -426,6 +427,11 @@ function App() {
       if (blockchain.wlSale) {
         checkEligibility();
       }
+
+      let tempAcc = blockchain.account;
+      
+      tempAcc = tempAcc.substr(0,5) + '...' + tempAcc.substr(tempAcc.length - 35, tempAcc.length);
+      setWalletDisplay(tempAcc);
     } else {
       setConnected(false);
     }
@@ -608,6 +614,10 @@ function App() {
                     </s.Container>
                   </>
                 )}
+                <s.SpacerSmall />
+                <s.TextDescription2>
+                  {walletDisplay}
+                </s.TextDescription2>
                 <s.SpacerSmall />
                 <s.TextDescription2 onClick={(e) => {
                   e.preventDefault();
