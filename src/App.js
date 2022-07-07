@@ -232,6 +232,9 @@ function App() {
     const newOGTotal = ogTotal + mintAmount;
     const newWlTotal = wlTotal + mintAmount;
 
+    console.log(wlType)
+    console.log(ogTotal)
+    console.log(wlTotal)
     if (newSupply > maxSupply) {
       alert("Beyond max supply.")
     } else if ((wlType === 1 && (newOGTotal > maxOG)) || (wlType === 2 && (newWlTotal > maxWl)))  {
