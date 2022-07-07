@@ -222,16 +222,19 @@ function App() {
 
   const verifyWLSale = () => {
     const totSupply = data.totalSupply;
+    const ogTotal = data.ogTotal;
     const wlTotal = data.wlTotal;
+    const maxOG = CONFIG.MAX_MINT_OG;
     const maxWl = CONFIG.MAX_MINT_WL;
     const maxSupply = CONFIG.MAX_SUPPLY;
 
     const newSupply = totSupply + mintAmount;
+    const newOGTotal = ogTotal + mintAmount;
     const newWlTotal = wlTotal + mintAmount;
 
     if (newSupply > maxSupply) {
       alert("Beyond max supply.")
-    } else if (newWlTotal > maxWl) {
+    } else if ((wlType === 1 && newOGTotal > maxOG) || (wlType === 2 && newWlTotal > maxWl))  {
       alert("You have reached the maximum amount of mints.")
     } else {
       checkEligibility();
