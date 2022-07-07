@@ -221,9 +221,9 @@ function App() {
   };
 
   const verifyWLSale = () => {
-    const totSupply = data.totalSupply;
-    const ogTotal = data.ogTotal;
-    const wlTotal = data.wlTotal;
+    const totSupply = +(data.totalSupply);
+    const ogTotal = +(data.ogTotal);
+    const wlTotal = +(data.wlTotal);
     const maxOG = CONFIG.MAX_MINT_OG;
     const maxWl = CONFIG.MAX_MINT_WL;
     const maxSupply = CONFIG.MAX_SUPPLY;
@@ -257,8 +257,8 @@ function App() {
   }
 
   const verifyPSale = () => {
-    const totSupply = data.totalSupply;
-    const pubTotal = data.pubTotal;
+    const totSupply = +(data.totalSupply);
+    const pubTotal = +(data.pubTotal);
     const maxPub = CONFIG.MAX_MINT_PUB;
     const maxSupply = CONFIG.MAX_SUPPLY;
 
