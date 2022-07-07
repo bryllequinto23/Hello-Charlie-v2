@@ -188,8 +188,6 @@ function App() {
     // console.log("Cost: ", totalCostWei);
     // console.log("Gas limit: ", totalGasLimit);
     setErrorMsg(0);
-    setFeedback(`Minting your Charlie...`);
-    setClaimingNft(true);
     checkStatus();
   };
 
@@ -234,18 +232,17 @@ function App() {
 
     if (newSupply > maxSupply) {
       alert("Beyond max supply.")
-      setClaimingNft(false);
-      setFeedback('')
     } else if ((wlType === 1 && (newOGTotal > maxOG)) || (wlType === 2 && (newWlTotal > maxWl)))  {
       alert("You have reached the maximum amount of mints.")
-      setClaimingNft(false);
-      setFeedback('')
     } else {
       checkEligibility();
       
       if (!isEligible) {
         alert("You are not og/whitelisted.")
       } else {
+        setFeedback(`Minting your Charlie...`);
+        setClaimingNft(true);
+
         if (wlType === 1) {
           console.log('OG MINT')
           ogMint();
@@ -268,13 +265,11 @@ function App() {
 
     if (newSupply > maxSupply) {
       alert("Beyond max supply.")
-      setFeedback('')
-      setClaimingNft(false);
     } else if (newPubTotal > maxPub) {
       alert("You have reached the maximum amount of mints.")
-      setFeedback('')
-      setClaimingNft(false);
     } else {
+      setFeedback(`Minting your Charlie...`);
+      setClaimingNft(true);
       publicMint();
     }
   }
