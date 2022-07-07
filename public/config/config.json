@@ -8,7 +8,7 @@
   },
   "NFT_NAME": "Hello, Charlie!",
   "SYMBOL": "HCHR",
-  "MAX_SUPPLY": 10,
+  "MAX_SUPPLY": 500,
   "MAX_MINT_WL": 3,
   "MAX_MINT_OG": 5,
   "MAX_MINT_PUB": 20,
