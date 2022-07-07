@@ -232,13 +232,12 @@ function App() {
     const newOGTotal = ogTotal + mintAmount;
     const newWlTotal = wlTotal + mintAmount;
 
-    console.log(wlType)
-    console.log(ogTotal)
-    console.log(wlTotal)
     if (newSupply > maxSupply) {
       alert("Beyond max supply.")
+      setClaimingNft(false);
     } else if ((wlType === 1 && (newOGTotal > maxOG)) || (wlType === 2 && (newWlTotal > maxWl)))  {
       alert("You have reached the maximum amount of mints.")
+      setClaimingNft(false);
     } else {
       checkEligibility();
       
@@ -267,8 +266,10 @@ function App() {
 
     if (newSupply > maxSupply) {
       alert("Beyond max supply.")
+      setClaimingNft(false);
     } else if (newPubTotal > maxPub) {
       alert("You have reached the maximum amount of mints.")
+      setClaimingNft(false);
     } else {
       publicMint();
     }
