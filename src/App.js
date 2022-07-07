@@ -272,7 +272,7 @@ function App() {
   }
 
   const ogMint = () => {
-    let cost = CONFIG.WEI_COST_WL;
+    let cost = CONFIG.WEI_COST_OG;
     let gasLimit = CONFIG.GAS_LIMIT;
     let totalCostWei = String(cost * mintAmount);
     let totalGasLimit = String(gasLimit * mintAmount);
@@ -547,7 +547,7 @@ function App() {
                 ) : (
                   <>
                     <s.TextTitle style={{ textAlign: "center", color: "var(--primary-text)" }}>
-                        1 Charlie = { blockchain.wlSale ? CONFIG.DISPLAY_COST_WL : CONFIG.DISPLAY_COST}{" "}
+                        1 Charlie = { blockchain.wlSale ? (wlType === 1 ? CONFIG.DISPLAY_COST_OG : CONFIG.DISPLAY_COST_WL) : CONFIG.DISPLAY_COST}{" "}
                         {CONFIG.NETWORK.SYMBOL}.
                     </s.TextTitle>
                     {/* <s.SpacerXSmall />
