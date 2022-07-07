@@ -235,9 +235,11 @@ function App() {
     if (newSupply > maxSupply) {
       alert("Beyond max supply.")
       setClaimingNft(false);
+      setFeedback('')
     } else if ((wlType === 1 && (newOGTotal > maxOG)) || (wlType === 2 && (newWlTotal > maxWl)))  {
       alert("You have reached the maximum amount of mints.")
       setClaimingNft(false);
+      setFeedback('')
     } else {
       checkEligibility();
       
@@ -266,9 +268,11 @@ function App() {
 
     if (newSupply > maxSupply) {
       alert("Beyond max supply.")
+      setFeedback('')
       setClaimingNft(false);
     } else if (newPubTotal > maxPub) {
       alert("You have reached the maximum amount of mints.")
+      setFeedback('')
       setClaimingNft(false);
     } else {
       publicMint();
