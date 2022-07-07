@@ -234,7 +234,7 @@ function App() {
 
     if (newSupply > maxSupply) {
       alert("Beyond max supply.")
-    } else if ((wlType === 1 && newOGTotal > maxOG) || (wlType === 2 && newWlTotal > maxWl))  {
+    } else if ((wlType === 1 && (newOGTotal > maxOG)) || (wlType === 2 && (newWlTotal > maxWl)))  {
       alert("You have reached the maximum amount of mints.")
     } else {
       checkEligibility();
