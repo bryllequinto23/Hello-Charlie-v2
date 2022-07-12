@@ -492,6 +492,15 @@ function App() {
               { blockchain.paused || (!blockchain.paused && !blockchain.wlSale && !blockchain.pSale) ? 
                 "Minting is not allowed at the moment" : "You are not OG/whitelisted." }
             </s.TextTitle>
+            <s.SpacerSmall />
+            <s.TextDescription2>
+              {walletDisplay}
+            </s.TextDescription2>
+            <s.TextDescription2 onClick={(e) => {
+              e.preventDefault();
+              disconnect();}}>
+              DISCONNECT
+            </s.TextDescription2>
           </s.Container>
         </s.Container3>
       ) : (
