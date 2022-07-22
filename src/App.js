@@ -481,7 +481,7 @@ function App() {
     <s.Screen2>
       <s.Container2 flex={2} image={CONFIG.SHOW_BACKGROUND ? "/config/images/bg6.png" : null}>
       </s.Container2>
-      {REACT_APP_API_KEY}
+      {process.env.REACT_APP_API_KEY}
       { isConnected && (blockchain.paused || (blockchain.wlSale && !isEligible) || (!blockchain.paused && !blockchain.wlSale && !blockchain.pSale)) ? (
         <s.Container3 flex={2}>
           <s.Container flex={2} jc={"center"} ai={"center"}>
