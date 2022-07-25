@@ -637,12 +637,10 @@ function App() {
                     </s.Container>
                     <s.SpacerSmall />
                     <s.Container ai={"center"} jc={"center"} fd={"row"}>
-                      <form onSubmit= {(e) => {
-                          e.preventDefault();
-                          handleSubmit();
-                        }}>
+                      <form>
                         <ReCAPTCHA sitekey={process.env.REACT_APP_SITE_KEY}
-                          ref={captchaRef}/>
+                          ref={captchaRef}
+                          onChange={handleSubmit()}/>
                       </form>
                     </s.Container>
                   </>
