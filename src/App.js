@@ -187,7 +187,7 @@ function App() {
     OG: []
   });
 
-  const handleSubmit = () => {
+  const handleSubmit = async() => {
     const token = captchaRef.current.getValue();
     captchaRef.current.reset();
 
