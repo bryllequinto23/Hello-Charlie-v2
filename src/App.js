@@ -6,6 +6,7 @@ import * as s from "./styles/globalStyles";
 import styled from "styled-components";
 import keccak256 from "keccak256";
 import MerkleTree from "merkletreejs";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const truncate = (input, len) =>
   input.length > len ? `${input.substring(0, len)}...` : input;
@@ -621,6 +622,11 @@ function App() {
                         }}>
                         {claimingNft ? "MINTING..." : "MINT"}
                       </StyledButton2>
+                    </s.Container>
+                    <s.Container>
+                      <form>
+                        <reCAPTCHA sitekey={process.env.REACT_APP_SITE_KEY}/>
+                      </form>
                     </s.Container>
                   </>
                 )}
