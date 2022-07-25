@@ -188,14 +188,15 @@ function App() {
   });
 
   const handleSubmit = async() => {
-    const token = captchaRef.current.getValue();
-    captchaRef.current.reset();
+    alert('handle submit')
+    // const token = captchaRef.current.getValue();
+    // captchaRef.current.reset();
 
-    await axios.post('api/try.php', {token})
-      .then(res =>  console.log(res))
-      .catch((error) => {
-      console.log(error);
-      })
+    // await axios.post('api/try.php', {token})
+    //   .then(res =>  console.log(res))
+    //   .catch((error) => {
+    //   console.log(error);
+    //   })
   }
 
   const claimNFTs = () => {
@@ -625,24 +626,25 @@ function App() {
                       </StyledRoundButton2>
                     </s.Container>
                     <s.SpacerSmall />
-                    <s.Container ai={"center"} jc={"center"} fd={"row"}>
-                      <StyledButton2 disabled={claimingNft ? 1 : 0}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          claimNFTs();
-                          getData();
-                        }}>
-                        {claimingNft ? "MINTING..." : "MINT"}
-                      </StyledButton2>
-                    </s.Container>
-                    <s.SpacerSmall />
-                    <s.Container ai={"center"} jc={"center"} fd={"row"}>
-                      <form>
-                        <ReCAPTCHA sitekey={process.env.REACT_APP_SITE_KEY}
-                          ref={captchaRef}
-                          onChange={handleSubmit()}/>
-                      </form>
-                    </s.Container>
+                    <form onSubmit={handleSubmit}>
+                      <s.Container ai={"center"} jc={"center"} fd={"row"}>
+                        <StyledButton2 type="submit"
+                          disabled={claimingNft ? 1 : 0}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            claimNFTs();
+                            getData();
+                          }}>
+                          {claimingNft ? "MINTING..." : "MINT"}
+                        </StyledButton2>
+                      </s.Container>
+                      <s.SpacerSmall />
+                      <s.Container ai={"center"} jc={"center"} fd={"row"}>
+                          <ReCAPTCHA sitekey={process.env.REACT_APP_SITE_KEY}
+                            ref={captchaRef}/>
+                      </s.Container>
+                    </form>
+                    
                   </>
                 )}
                 <s.SpacerSmall />
