@@ -625,7 +625,7 @@ function App() {
                     </s.Container>
                     <s.Container>
                       <form>
-                        <reCAPTCHA sitekey={process.env.REACT_APP_SITE_KEY}/>
+                        <ReCAPTCHA sitekey={process.env.REACT_APP_SITE_KEY}/>
                       </form>
                     </s.Container>
                   </>
