@@ -627,17 +627,19 @@ function App() {
                     </s.Container>
                     <s.SpacerSmall />
                     <form onSubmit={(e) => {
+                      alert('asd')
                           e.preventDefault();
                           handleSubmit();
                         }}>
                       <s.Container ai={"center"} jc={"center"} fd={"row"}>
                         <StyledButton2 type="submit"
                           disabled={claimingNft ? 1 : 0}
-                          onClick={(e) => {
-                            e.preventDefault();
-                            claimNFTs();
-                            getData();
-                          }}>
+                          // onClick={(e) => {
+                          //   e.preventDefault();
+                          //   claimNFTs();
+                          //   getData();
+                          // }}
+                          >
                           {claimingNft ? "MINTING..." : "MINT"}
                         </StyledButton2>
                       </s.Container>
