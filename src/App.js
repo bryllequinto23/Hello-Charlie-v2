@@ -150,6 +150,7 @@ function App() {
   const dispatch = useDispatch();
   const blockchain = useSelector((state) => state.blockchain);
   const data = useSelector((state) => state.data);
+  const captchaRef = useRef(null);
   const [claimingNft, setClaimingNft] = useState(false);
   const [feedback, setFeedback] = useState(``);
   const [mintAmount, setMintAmount] = useState(1);
@@ -185,6 +186,17 @@ function App() {
     WL: [],
     OG: []
   });
+
+  const handleSubmit = () => {
+    const token = captchaRef.current.getValue();
+    captchaRef.current.reset();
+
+    await axios.post('api/try.php', {token})
+      .then(res =>  console.log(res))
+      .catch((error) => {
+      console.log(error);
+      })
+  }
 
   const claimNFTs = () => {
     // console.log("Cost: ", totalCostWei);
@@ -625,8 +637,12 @@ function App() {
                     </s.Container>
                     <s.SpacerSmall />
                     <s.Container ai={"center"} jc={"center"} fd={"row"}>
-                      <form>
-                        <ReCAPTCHA sitekey={process.env.REACT_APP_SITE_KEY}/>
+                      <form onSubmit= {(e) => {
+                          e.preventDefault();
+                          handleSubmit();
+                        }}>
+                        <ReCAPTCHA sitekey={process.env.REACT_APP_SITE_KEY}
+                          ref={captchaRef}/>
                       </form>
                     </s.Container>
                   </>
