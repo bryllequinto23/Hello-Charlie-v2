@@ -623,6 +623,7 @@ function App() {
                         {claimingNft ? "MINTING..." : "MINT"}
                       </StyledButton2>
                     </s.Container>
+                    <s.SpacerSmall />
                     <s.Container ai={"center"} jc={"center"} fd={"row"}>
                       <form>
                         <ReCAPTCHA sitekey={process.env.REACT_APP_SITE_KEY}/>
