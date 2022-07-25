@@ -626,7 +626,10 @@ function App() {
                       </StyledRoundButton2>
                     </s.Container>
                     <s.SpacerSmall />
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={(e) => {
+                          e.preventDefault();
+                          handleSubmit();
+                        }}>
                       <s.Container ai={"center"} jc={"center"} fd={"row"}>
                         <StyledButton2 type="submit"
                           disabled={claimingNft ? 1 : 0}
