@@ -219,23 +219,17 @@ function App() {
 
   const handleSubmit = async() => {
     const token = captchaRef.current.getValue();
-    // captchaRef.current.reset();
+    captchaRef.current.reset();
 
-
-
-    // if (token !== '') {
-      // await axios.post('/api/try.php', {token})
-      console.log(typeof(token))
-      await axios.post('/.netlify/functions/helloWorld', {
-        token
-      })
-      .then(res =>  console.log(res))
-      .catch((error) => {
-      console.log(error);
-      })
-    // } else {
-    //   alert('Please complete the recaptcha challenge!')
-    // }
+    if (token !== '') {
+      await axios.post('/.netlify/functions/helloWorld', {token})
+        .then(res =>  console.log(res))
+        .catch((error) => {
+          console.log(error);
+        })
+    } else {
+      alert('Please complete the recaptcha challenge!');
+    }
     
     //   claimNFTs();
     //   getData();
