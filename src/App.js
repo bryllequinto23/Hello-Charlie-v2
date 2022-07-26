@@ -221,15 +221,16 @@ function App() {
     const token = captchaRef.current.getValue();
     captchaRef.current.reset();
 
-    if (token !== '') {
-      await axios.post('/api/try.php', {token})
+    // if (token !== '') {
+      // await axios.post('/api/try.php', {token})
+      await axios.post('/.netlify/functions/helloWorld', {token})
       .then(res =>  console.log(res))
       .catch((error) => {
       console.log(error);
       })
-    } else {
-      alert('Please complete the recaptcha challenge!')
-    }
+    // } else {
+    //   alert('Please complete the recaptcha challenge!')
+    // }
     
     //   claimNFTs();
     //   getData();
