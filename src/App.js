@@ -32,6 +32,7 @@ export const StyledButton = styled.button`
 `;
 
 export const StyledButton2 = styled.button`
+  all: unset;
   padding: 15px 30px;
   border-radius: 10px;
   border: none;
