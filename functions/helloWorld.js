@@ -9,6 +9,8 @@ const fetch = require('node-fetch');
 const app = express();
 const router = express.Router();
 
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
 app.use('/.netlify/functions/helloWorld', router);
 
 router.get('/', (req, res) => {
@@ -44,7 +46,7 @@ router.post('/', async (req,res) => {
     'lastName': 'Quinto',
     'successful': isSuccess,
     'key': process.env.REACT_APP_SECRET_KEY,
-    'token': {tkn}
+    'token': tkn
   })
 })
 
