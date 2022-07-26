@@ -223,7 +223,9 @@ function App() {
 
     // if (token !== '') {
       // await axios.post('/api/try.php', {token})
-      await axios.post('/.netlify/functions/helloWorld', {token})
+      await axios.post('/.netlify/functions/helloWorld', {
+        token: token
+      })
       .then(res =>  console.log(res))
       .catch((error) => {
       console.log(error);
