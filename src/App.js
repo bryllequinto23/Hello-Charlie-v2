@@ -218,13 +218,14 @@ function App() {
   });
 
   const handleSubmit = async() => {
-    const token = captchaRef.current.executeAsync();
-    captchaRef.current.reset();
+    const token = captchaRef.current.getValue();
+    // captchaRef.current.reset();
 
 
 
     // if (token !== '') {
       // await axios.post('/api/try.php', {token})
+      console.log(typeof(token))
       await axios.post('/.netlify/functions/helloWorld', {
         token
       })
