@@ -32,7 +32,6 @@ export const StyledButton = styled.button`
 `;
 
 export const StyledButton2 = styled.button`
-  all: unset;
   padding: 15px 30px;
   border-radius: 10px;
   border: none;
@@ -40,6 +39,35 @@ export const StyledButton2 = styled.button`
   font-weight: bold;
   color: var(--accent-text);
   width: 40%;
+  font-size: 30px;
+  cursor: pointer;
+
+  :active {
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+  }
+
+  :disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  @media (max-width: 767px) {
+    width: 60%;
+    font-size: 35px;
+  }
+`;
+
+export const StyledButton3 = styled.button`
+  all: unset;
+  padding: 15px 30px;
+  border-radius: 10px;
+  border: none;
+  background-color: var(--secondary);
+  font-weight: bold;
+  color: var(--accent-text);
+  width: 100%;
   font-size: 30px;
   cursor: pointer;
   text-align: center;
@@ -634,7 +662,7 @@ function App() {
                           handleSubmit();
                         }}>
                       <s.Container ai={"center"} jc={"center"} fd={"row"}>
-                        <StyledButton2 type="submit"
+                        <StyledButton3 type="submit"
                           disabled={claimingNft ? 1 : 0}
                           // onClick={(e) => {
                           //   e.preventDefault();
@@ -643,7 +671,7 @@ function App() {
                           // }}
                           >
                           {claimingNft ? "MINTING..." : "MINT"}
-                        </StyledButton2>
+                        </StyledButton3>
                       </s.Container>
                       <s.SpacerSmall />
                       <s.Container ai={"center"} jc={"center"} fd={"row"}>
