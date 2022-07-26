@@ -41,7 +41,7 @@ router.post('/', async (req,res) => {
     'lastName': 'Quinto',
     'successful': isSuccess,
     'key': process.env.REACT_APP_SECRET_KEY,
-    'token': data
+    'token': req.body.token
   })
 })
 
