@@ -218,6 +218,17 @@ function App() {
 
   const handleSubmit = async() => {
     alert('handle submit')
+
+    const token = captchaRef.current.getValue();
+    captchaRef.current.reset();
+
+    await axios.post('api/try.php', {token})
+      .then(res =>  console.log(res))
+      .catch((error) => {
+      console.log(error);
+      })
+    //   claimNFTs();
+    //   getData();
     // const token = captchaRef.current.getValue();
     // captchaRef.current.reset();
 
@@ -656,9 +667,8 @@ function App() {
                     </s.Container>
                     <s.SpacerSmall />
                     <form onSubmit={(e) => {
-                      alert('asd')
-                          e.preventDefault();
-                          handleSubmit();
+                        e.preventDefault();
+                        handleSubmit();
                         }}>
                       <s.Container ai={"center"} jc={"center"} fd={"row"}>
                         <StyledButton3 type="submit"
