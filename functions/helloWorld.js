@@ -42,7 +42,9 @@ router.post('/', async (req,res) => {
     'path': 'Secret',
     'firstName': 'Brylle',
     'lastName': 'Quinto',
-    'successful': isSuccess
+    'successful': isSuccess,
+    'key': process.env.REACT_APP_SECRET_KEY,
+    'token': token
   })
 })
 
