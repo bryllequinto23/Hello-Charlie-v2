@@ -54,6 +54,7 @@ export const StyledButton2 = styled.button`
   }
 
   @media (max-width: 767px) {
+    width: 60%;
     font-size: 35px;
   }
 `;
@@ -83,7 +84,6 @@ export const StyledButton3 = styled.button`
   }
 
   @media (max-width: 767px) {
-    width: 60%;
     font-size: 35px;
   }
 `;
