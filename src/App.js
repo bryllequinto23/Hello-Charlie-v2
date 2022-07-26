@@ -7,6 +7,7 @@ import styled from "styled-components";
 import keccak256 from "keccak256";
 import MerkleTree from "merkletreejs";
 import ReCAPTCHA from "react-google-recaptcha";
+import axios from "axios";
 
 const truncate = (input, len) =>
   input.length > len ? `${input.substring(0, len)}...` : input;
