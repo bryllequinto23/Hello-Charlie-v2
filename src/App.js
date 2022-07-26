@@ -220,6 +220,7 @@ function App() {
   const handleSubmit = async() => {
     alert('handle submit')
 
+    console.log(captchaRef)
     const token = captchaRef.current.getValue();
     captchaRef.current.reset();
 
