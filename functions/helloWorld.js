@@ -22,7 +22,7 @@ router.get('/', (req, res) => {
   });
 });
 
-router.post('/post', async (req,res) => {
+router.post('/', async (req,res) => {
   const {tkn} = req.body;
 
   const response = await fetch(
@@ -41,7 +41,7 @@ router.post('/post', async (req,res) => {
     'lastName': 'Quinto',
     'successful': isSuccess,
     'key': process.env.REACT_APP_SECRET_KEY,
-    'token': tkn
+    'token': data
   })
 })
 
