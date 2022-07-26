@@ -20,16 +20,16 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', async (req,res) => {
-  const {token} = req.body.token;
+  const tkn = req.body;
 
-  url = `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.REACT_APP_SECRET_KEY}&response=${token}`;
+  url = `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.REACT_APP_SECRET_KEY}&response=${tkn}`;
   
   // request(url, (err, response, body) => {
   //   body. JSON.parse(body);
   // })
 
   const response = await fetch(
-    `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.REACT_APP_SECRET_KEY}&response=${token}`,
+    `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.REACT_APP_SECRET_KEY}&response=${tkn}`,
     {
       method: "POST"
     }
@@ -44,7 +44,7 @@ router.post('/', async (req,res) => {
     'lastName': 'Quinto',
     'successful': isSuccess,
     'key': process.env.REACT_APP_SECRET_KEY,
-    'token': token
+    'token': tkn
   })
 })
 
