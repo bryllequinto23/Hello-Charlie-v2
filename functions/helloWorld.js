@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', async (req,res) => {
-  const {token} = req.body;
+  const {token} = req.body.token;
 
   url = `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.REACT_APP_SECRET_KEY}&response=${token}`;
   
