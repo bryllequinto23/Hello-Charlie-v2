@@ -54,7 +54,6 @@ export const StyledButton2 = styled.button`
   }
 
   @media (max-width: 767px) {
-    width: 60%;
     font-size: 35px;
   }
 `;
