@@ -222,7 +222,7 @@ function App() {
     captchaRef.current.reset();
 
     if (token !== '') {
-      await axios.post('api/try.php', {token})
+      await axios.post('/api/try.php', {token})
       .then(res =>  console.log(res))
       .catch((error) => {
       console.log(error);
