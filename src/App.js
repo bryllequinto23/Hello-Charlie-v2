@@ -42,6 +42,7 @@ export const StyledButton2 = styled.button`
   width: 40%;
   font-size: 30px;
   cursor: pointer;
+  text-align: center;
 
   :active {
     box-shadow: none;
