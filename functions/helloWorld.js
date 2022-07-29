@@ -36,12 +36,7 @@ router.post('/', async (req,res) => {
   const isSuccess = data.success;
 
   res.json({
-    'path': 'Secret',
-    'firstName': 'Brylle',
-    'lastName': 'Quinto',
     'successful': isSuccess,
-    'key': process.env.REACT_APP_SECRET_KEY,
-    'token': req.body.token
   })
 })
 
