@@ -180,7 +180,7 @@ function App() {
   const dispatch = useDispatch();
   const blockchain = useSelector((state) => state.blockchain);
   const data = useSelector((state) => state.data);
-  const captchaRef = useRef(null);
+  const captchaRef = useRef();
   const [claimingNft, setClaimingNft] = useState(false);
   const [feedback, setFeedback] = useState(``);
   const [mintAmount, setMintAmount] = useState(1);
