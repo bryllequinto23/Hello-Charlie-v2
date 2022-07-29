@@ -224,7 +224,7 @@ function App() {
     if (token !== '') {
       await axios.post('/.netlify/functions/helloWorld', {token})
         .then(res => {
-          console.log(res['successful'])
+          console.log(res)
         }).catch((error) => {
           console.log(error);
         })
