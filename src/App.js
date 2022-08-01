@@ -682,7 +682,7 @@ function App() {
                         }}>
                       <s.Container ai={"center"} jc={"center"} fd={"row"}>
                         <StyledButton3 type="submit"
-                          disabled={captchaSuccess || claimingNft ? 1 : 0}
+                          disabled={captchaSuccess || claimingNft ? 0 : 1}
                           // onClick={(e) => {
                           //   e.preventDefault();
                           //   claimNFTs();
