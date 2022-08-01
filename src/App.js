@@ -483,7 +483,7 @@ function App() {
   };
 
   const getData = () => {
-    console.log(inputRef)
+    console.log(inputRef.current.getValue())
     if (blockchain.account !== "" && blockchain.smartContract !== null) {
       setConnected(true);
       dispatch(fetchData(blockchain.account));
