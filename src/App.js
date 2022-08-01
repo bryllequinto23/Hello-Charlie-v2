@@ -744,7 +744,8 @@ function App() {
                       mintSubmit();
                     }}>
                       <s.Container ai={"center"} jc={"center"} fd={"row"}>
-                        <StyledButton3 disabled={captchaSuccess || !claimingNft ? 0 : 1}
+                        <StyledButton3 disabled={true}
+                        // disabled={captchaSuccess || !claimingNft ? 0 : 1}
                           type="submit">
                           {/* onClick={(e) => {
                             e.preventDefault();
