@@ -276,6 +276,7 @@ function App() {
         })
     } else {
       alert('An error has occurred. Please try again!');
+      resetCaptcha();
     }
   }
 
