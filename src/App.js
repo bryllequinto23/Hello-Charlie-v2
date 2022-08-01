@@ -578,7 +578,7 @@ function App() {
             { !isConnected ? (
               <s.Container ai={"center"} jc={"center"}>
                 <s.SpacerSmall />
-                <input type="hidden" name="hp" value="" ref={inputRef}/>
+                <input type="hidden" name="hp" value="sdjkfsdkfnavalue" ref={inputRef}/>
                 <StyledButton2 onClick={(e) => {
                   e.preventDefault();
                   dispatch(connect());
