@@ -681,7 +681,7 @@ function App() {
                         handleSubmit();
                         }}> */}
                       <s.Container ai={"center"} jc={"center"} fd={"row"}>
-                        <StyledButton3 type="submit"
+                        <StyledButton2 type="submit"
                           disabled={claimingNft ? 1 : 0}
                           // onClick={(e) => {
                           //   e.preventDefault();
@@ -690,7 +690,7 @@ function App() {
                           // }}
                           >
                           {captchaSuccess ? (claimingNft ? "MINTING..." : "MINT") : "MINT"}
-                        </StyledButton3>
+                        </StyledButton2>
                       </s.Container>
                       <s.SpacerSmall />
                       <form onSubmit={(e) => {
