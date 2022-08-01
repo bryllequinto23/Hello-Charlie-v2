@@ -180,7 +180,8 @@ function App() {
   const dispatch = useDispatch();
   const blockchain = useSelector((state) => state.blockchain);
   const data = useSelector((state) => state.data);
-  const captchaRef = useRef();
+  const captchaRef = useRef(null);
+  const [captchaSuccess, setCaptchaSuccess] = useState(false);
   const [claimingNft, setClaimingNft] = useState(false);
   const [feedback, setFeedback] = useState(``);
   const [mintAmount, setMintAmount] = useState(1);
@@ -219,17 +220,21 @@ function App() {
 
   const handleSubmit = async() => {
     const token = captchaRef.current.getValue();
-    captchaRef.current.reset();
 
     if (token !== '') {
       await axios.post('/.netlify/functions/helloWorld', {token})
         .then(res => {
+          if (res.data.successful) {
+            setCaptchaSuccess(true)
+          }
           console.log(res.data.successful)
         }).catch((error) => {
-          console.log(error);
+          alert(error)
+          captchaRef.current.reset();
         })
     } else {
       alert('Please complete the recaptcha challenge!');
+      captchaRef.current.reset();
     }
     
     //   claimNFTs();
@@ -671,10 +676,10 @@ function App() {
                       </StyledRoundButton2>
                     </s.Container>
                     <s.SpacerSmall />
-                    <form onSubmit={(e) => {
+                    {/* <form onSubmit={(e) => {
                         e.preventDefault();
                         handleSubmit();
-                        }}>
+                        }}> */}
                       <s.Container ai={"center"} jc={"center"} fd={"row"}>
                         <StyledButton3 type="submit"
                           disabled={claimingNft ? 1 : 0}
@@ -684,15 +689,21 @@ function App() {
                           //   getData();
                           // }}
                           >
-                          {claimingNft ? "MINTING..." : "MINT"}
+                          {captchaSuccess ? (claimingNft ? "MINTING..." : "MINT") : "MINT"}
                         </StyledButton3>
                       </s.Container>
                       <s.SpacerSmall />
-                      <s.Container ai={"center"} jc={"center"} fd={"row"}>
+                      <form onSubmit={(e) => {
+                        e.preventDefault();
+                        handleSubmit();
+                        }}>
+                        <s.Container ai={"center"} jc={"center"} fd={"row"}>
                           <ReCAPTCHA sitekey={process.env.REACT_APP_SITE_KEY}
                             ref={captchaRef}/>
-                      </s.Container>
-                    </form>
+                        </s.Container>
+                      </form>
+                      
+                    {/* </form> */}
                     
                   </>
                 )}
