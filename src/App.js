@@ -225,9 +225,9 @@ function App() {
       await axios.post('/.netlify/functions/helloWorld', {token})
         .then(res => {
           if (res.data.successful) {
-            setCaptchaSuccess(true)
+            alert('Success!')
+            setCaptchaSuccess(true);
           }
-          console.log(res.data.successful)
         }).catch((error) => {
           alert(error)
           captchaRef.current.reset();
@@ -682,7 +682,7 @@ function App() {
                         }}>
                       <s.Container ai={"center"} jc={"center"} fd={"row"}>
                         <StyledButton3 type="submit"
-                          disabled={captchaSuccess ? (claimingNft ? 1 : 0) : 1}
+                          disabled={captchaSuccess || claimingNft ? 1 : 0}
                           // onClick={(e) => {
                           //   e.preventDefault();
                           //   claimNFTs();
