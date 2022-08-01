@@ -224,6 +224,7 @@ function App() {
     if (token !== '') {
       await axios.post('/.netlify/functions/helloWorld', {token})
         .then(res => {
+          console.log(res.data.successful)
           if (res.data.successful) {
             alert('Success!')
             setCaptchaSuccess(true);
