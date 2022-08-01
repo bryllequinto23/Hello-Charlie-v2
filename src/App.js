@@ -218,6 +218,31 @@ function App() {
     OG: []
   });
 
+  const onChange = (value) => {
+    console.log("Captcha value:", value);
+  }
+
+  const handleChange = async() => {
+    const token = captchaRef.current.getValue();
+
+    if (token !== '') {
+      await axios.post('/.netlify/functions/helloWorld', {token})
+        .then(res => {
+          console.log(res.data.successful)
+          if (res.data.successful) {
+            alert('Success!')
+            setCaptchaSuccess(true);
+          }
+        }).catch((error) => {
+          alert(error)
+          captchaRef.current.reset();
+        })
+    } else {
+      alert('Please complete the recaptcha challenge!');
+      captchaRef.current.reset();
+    }
+  }
+
   const handleSubmit = async() => {
     const token = captchaRef.current.getValue();
 
@@ -696,7 +721,8 @@ function App() {
                       <s.SpacerSmall />
                       <s.Container ai={"center"} jc={"center"} fd={"row"}>
                         <ReCAPTCHA sitekey={process.env.REACT_APP_SITE_KEY}
-                          ref={captchaRef}/>
+                          ref={captchaRef}
+                          onChange={onChange}/>
                       </s.Container>
                     </form>
                   </>
