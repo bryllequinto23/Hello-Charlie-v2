@@ -219,11 +219,7 @@ function App() {
   });
 
   const onChange = (value) => {
-    console.log("Captcha value:", value);
-  }
-
-  const handleChange = async() => {
-    const token = captchaRef.current.getValue();
+    const token = value;
 
     if (token !== '') {
       await axios.post('/.netlify/functions/helloWorld', {token})
@@ -235,45 +231,34 @@ function App() {
           }
         }).catch((error) => {
           alert(error)
-          captchaRef.current.reset();
+          // captchaRef.current.reset();
         })
     } else {
       alert('Please complete the recaptcha challenge!');
-      captchaRef.current.reset();
+      // captchaRef.current.reset();
     }
   }
 
-  const handleSubmit = async() => {
-    const token = captchaRef.current.getValue();
+  // const handleSubmit = async() => {
+  //   const token = captchaRef.current.getValue();
 
-    if (token !== '') {
-      await axios.post('/.netlify/functions/helloWorld', {token})
-        .then(res => {
-          console.log(res.data.successful)
-          if (res.data.successful) {
-            alert('Success!')
-            setCaptchaSuccess(true);
-          }
-        }).catch((error) => {
-          alert(error)
-          captchaRef.current.reset();
-        })
-    } else {
-      alert('Please complete the recaptcha challenge!');
-      captchaRef.current.reset();
-    }
-    
-    //   claimNFTs();
-    //   getData();
-    // const token = captchaRef.current.getValue();
-    // captchaRef.current.reset();
-
-    // await axios.post('api/try.php', {token})
-    //   .then(res =>  console.log(res))
-    //   .catch((error) => {
-    //   console.log(error);
-    //   })
-  }
+  //   if (token !== '') {
+  //     await axios.post('/.netlify/functions/helloWorld', {token})
+  //       .then(res => {
+  //         console.log(res.data.successful)
+  //         if (res.data.successful) {
+  //           alert('Success!')
+  //           setCaptchaSuccess(true);
+  //         }
+  //       }).catch((error) => {
+  //         alert(error)
+  //         captchaRef.current.reset();
+  //       })
+  //   } else {
+  //     alert('Please complete the recaptcha challenge!');
+  //     captchaRef.current.reset();
+  //   }
+  // }
 
   const claimNFTs = () => {
     // console.log("Cost: ", totalCostWei);
@@ -702,29 +687,29 @@ function App() {
                       </StyledRoundButton2>
                     </s.Container>
                     <s.SpacerSmall />
-                    <form onSubmit={(e) => {
+                    {/* <form onSubmit={(e) => {
                         e.preventDefault();
                         handleSubmit();
-                        }}>
+                        }}> */}
                       <s.Container ai={"center"} jc={"center"} fd={"row"}>
-                        <StyledButton3 type="submit"
-                          disabled={captchaSuccess || claimingNft ? 0 : 1}
-                          // onClick={(e) => {
-                          //   e.preventDefault();
-                          //   claimNFTs();
-                          //   getData();
-                          // }}
-                          >
+                        <StyledButton3 disabled={captchaSuccess || claimingNft ? 0 : 1}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            claimNFTs();
+                            getData();
+                          }}>
                           {claimingNft ? "MINTING..." : "MINT"}
                         </StyledButton3>
                       </s.Container>
                       <s.SpacerSmall />
-                      <s.Container ai={"center"} jc={"center"} fd={"row"}>
-                        <ReCAPTCHA sitekey={process.env.REACT_APP_SITE_KEY}
-                          ref={captchaRef}
-                          onChange={onChange}/>
-                      </s.Container>
-                    </form>
+                      <form>
+                        <s.Container ai={"center"} jc={"center"} fd={"row"}>
+                          <ReCAPTCHA sitekey={process.env.REACT_APP_SITE_KEY}
+                            ref={captchaRef}
+                            onChange={onChange}/>
+                        </s.Container>
+                      </form>
+                    {/* </form> */}
                   </>
                 )}
                 <s.SpacerSmall />
