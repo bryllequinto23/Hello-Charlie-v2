@@ -64,6 +64,7 @@ export const StyledButton2 = styled.button`
 `;
 
 export const StyledButton3 = styled.button`
+  all: unset;
   padding: 15px 30px;
   border-radius: 10px;
   border: none;
@@ -73,6 +74,7 @@ export const StyledButton3 = styled.button`
   width: 304px;
   font-size: 30px;
   cursor: pointer;
+  text-align: center;
 
   :active {
     box-shadow: none;
@@ -101,6 +103,7 @@ export const StyledButton4 = styled.button`
   width: 100%;
   font-size: 30px;
   cursor: pointer;
+  text-align: center;
 
   :active {
     box-shadow: none;
@@ -212,6 +215,7 @@ function App() {
   const data = useSelector((state) => state.data);
   const captchaRef = useRef(null);
   const inputRef = useRef(null);
+  const mintRef = useRef(null);
   const [captchaSuccess, setCaptchaSuccess] = useState(false);
   const [claimingNft, setClaimingNft] = useState(false);
   const [feedback, setFeedback] = useState(``);
@@ -272,6 +276,16 @@ function App() {
         })
     } else {
       alert('Please complete the recaptcha challenge!');
+    }
+  }
+
+  const mintSubmit = () => {
+    if (mintRef.current.value === '') {
+      claimNFTs();
+      getData();
+    } else {
+      alert('An error has occurred. Please try again!');
+      resetCaptcha();
     }
   }
 
@@ -725,23 +739,28 @@ function App() {
                       </StyledRoundButton2>
                     </s.Container>
                     <s.SpacerSmall />
-                    <s.Container ai={"center"} jc={"center"} fd={"row"}>
-                      <StyledButton3 disabled={captchaSuccess || !claimingNft ? 0 : 1}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          claimNFTs();
-                          getData();
-                        }}>
-                        {claimingNft ? "MINTING..." : "MINT"}
-                      </StyledButton3>
-                    </s.Container>
-                    <s.SpacerSmall/>
-                    <form>
+                    <form onSubmit={(e) => {
+                      e.preventDefault();
+                      mintSubmit();
+                    }}>
+                      <s.Container ai={"center"} jc={"center"} fd={"row"}>
+                        <StyledButton3 type="submit"
+                          disabled={captchaSuccess || !claimingNft ? 0 : 1}>
+                          {/* onClick={(e) => {
+                            e.preventDefault();
+                            claimNFTs();
+                            getData();
+                          }}> */}
+                          {claimingNft ? "MINTING..." : "MINT"}
+                        </StyledButton3>
+                      </s.Container>
+                      <s.SpacerSmall/>
                       <s.Container ai={"center"} jc={"center"} fd={"row"}>
                         <ReCAPTCHA sitekey={process.env.REACT_APP_SITE_KEY}
                           ref={captchaRef}
                           onChange={onChange}/>
                       </s.Container>
+                      <input type="hidden" name="hp-2" value="" ref={mintRef}/>
                     </form>
                   </>
                 )}
