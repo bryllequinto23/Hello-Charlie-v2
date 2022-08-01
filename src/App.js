@@ -687,29 +687,24 @@ function App() {
                       </StyledRoundButton2>
                     </s.Container>
                     <s.SpacerSmall />
-                    {/* <form onSubmit={(e) => {
-                        e.preventDefault();
-                        handleSubmit();
-                        }}> */}
+                    <s.Container ai={"center"} jc={"center"} fd={"row"}>
+                      <StyledButton3 disabled={captchaSuccess || claimingNft ? 0 : 1}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          claimNFTs();
+                          getData();
+                        }}>
+                        {claimingNft ? "MINTING..." : "MINT"}
+                      </StyledButton3>
+                    </s.Container>
+                    <s.SpacerSmall/>
+                    <form>
                       <s.Container ai={"center"} jc={"center"} fd={"row"}>
-                        <StyledButton3 disabled={captchaSuccess || claimingNft ? 0 : 1}
-                          onClick={(e) => {
-                            e.preventDefault();
-                            claimNFTs();
-                            getData();
-                          }}>
-                          {claimingNft ? "MINTING..." : "MINT"}
-                        </StyledButton3>
+                        <ReCAPTCHA sitekey={process.env.REACT_APP_SITE_KEY}
+                          ref={captchaRef}
+                          onChange={onChange}/>
                       </s.Container>
-                      <s.SpacerSmall />
-                      <form>
-                        <s.Container ai={"center"} jc={"center"} fd={"row"}>
-                          <ReCAPTCHA sitekey={process.env.REACT_APP_SITE_KEY}
-                            ref={captchaRef}
-                            onChange={onChange}/>
-                        </s.Container>
-                      </form>
-                    {/* </form> */}
+                    </form>
                   </>
                 )}
                 <s.SpacerSmall />
