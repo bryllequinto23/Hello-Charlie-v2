@@ -676,23 +676,23 @@ function App() {
                       </StyledRoundButton2>
                     </s.Container>
                     <s.SpacerSmall />
-                    <s.Container ai={"center"} jc={"center"} fd={"row"}>
-                      <StyledButton2 type="submit"
-                        disabled={captchaSuccess ? (claimingNft ? 1 : 0) : 0}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          claimNFTs();
-                          getData();
-                        }}
-                        >
-                        {claimingNft ? "MINTING..." : "MINT"}
-                      </StyledButton2>
-                    </s.Container>
-                    <s.SpacerSmall />
                     <form onSubmit={(e) => {
-                      e.preventDefault();
-                      handleSubmit();
-                      }}>
+                        e.preventDefault();
+                        handleSubmit();
+                        }}>
+                      <s.Container ai={"center"} jc={"center"} fd={"row"}>
+                        <StyledButton3 type="submit"
+                          disabled={captchaSuccess ? (claimingNft ? 1 : 0) : 1}
+                          // onClick={(e) => {
+                          //   e.preventDefault();
+                          //   claimNFTs();
+                          //   getData();
+                          // }}
+                          >
+                          {claimingNft ? "MINTING..." : "MINT"}
+                        </StyledButton3>
+                      </s.Container>
+                      <s.SpacerSmall />
                       <s.Container ai={"center"} jc={"center"} fd={"row"}>
                         <ReCAPTCHA sitekey={process.env.REACT_APP_SITE_KEY}
                           ref={captchaRef}/>
