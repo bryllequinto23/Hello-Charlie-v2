@@ -224,45 +224,18 @@ function App() {
     if (token !== '') {
       await axios.post('/.netlify/functions/helloWorld', {token})
         .then(res => {
-          console.log(res.data.successful)
           if (res.data.successful) {
-            alert('Success!')
             setCaptchaSuccess(true);
           }
         }).catch((error) => {
           alert(error)
-          // captchaRef.current.reset();
         })
     } else {
       alert('Please complete the recaptcha challenge!');
-      // captchaRef.current.reset();
     }
   }
 
-  // const handleSubmit = async() => {
-  //   const token = captchaRef.current.getValue();
-
-  //   if (token !== '') {
-  //     await axios.post('/.netlify/functions/helloWorld', {token})
-  //       .then(res => {
-  //         console.log(res.data.successful)
-  //         if (res.data.successful) {
-  //           alert('Success!')
-  //           setCaptchaSuccess(true);
-  //         }
-  //       }).catch((error) => {
-  //         alert(error)
-  //         captchaRef.current.reset();
-  //       })
-  //   } else {
-  //     alert('Please complete the recaptcha challenge!');
-  //     captchaRef.current.reset();
-  //   }
-  // }
-
   const claimNFTs = () => {
-    // console.log("Cost: ", totalCostWei);
-    // console.log("Gas limit: ", totalGasLimit);
     setErrorMsg(0);
     checkStatus();
   };
@@ -274,6 +247,7 @@ function App() {
     .then((paused) => {
       if (paused) {
         alert("Minting is paused");
+        resetCaptcha();
       } else {
         checkWhitelistSale();
       }
@@ -308,13 +282,16 @@ function App() {
 
     if (newSupply > maxSupply) {
       alert("Beyond max supply.")
+      resetCaptcha();
     } else if ((wlType === 1 && (newOGTotal > maxOG)) || (wlType === 2 && (newWlTotal > maxWl)))  {
       alert("You have reached the maximum amount of mints.")
+      resetCaptcha();
     } else {
       checkEligibility();
       
       if (!isEligible) {
         alert("You are not og/whitelisted.")
+        resetCaptcha();
       } else {
         setFeedback(`Minting your Charlie...`);
         setClaimingNft(true);
@@ -341,8 +318,10 @@ function App() {
 
     if (newSupply > maxSupply) {
       alert("Beyond max supply.")
+      resetCaptcha();
     } else if (newPubTotal > maxPub) {
       alert("You have reached the maximum amount of mints.")
+      resetCaptcha();
     } else {
       setFeedback(`Minting your Charlie...`);
       setClaimingNft(true);
@@ -378,6 +357,7 @@ function App() {
         setErrorMsg(1);
         setFeedback("Sorry, something went wrong please try again later.");
         setClaimingNft(false);
+        resetCaptcha();
         setTimeout(() => setFeedback(``), 4000);
       })
       .then((receipt) => {
@@ -388,6 +368,7 @@ function App() {
         );
         setClaimingNft(false);
         dispatch(fetchData(blockchain.account));
+        resetCaptcha();
         setTimeout(() => setFeedback(``), 4000);
       });
   }
@@ -420,6 +401,7 @@ function App() {
         setErrorMsg(1);
         setFeedback("Sorry, something went wrong please try again later.");
         setClaimingNft(false);
+        resetCaptcha();
         setTimeout(() => setFeedback(``), 4000);
       })
       .then((receipt) => {
@@ -430,6 +412,7 @@ function App() {
         );
         setClaimingNft(false);
         dispatch(fetchData(blockchain.account));
+        resetCaptcha();
         setTimeout(() => setFeedback(``), 4000);
       });
   };
@@ -453,6 +436,7 @@ function App() {
         setErrorMsg(1);
         setFeedback("Sorry, something went wrong please try again later.");
         setClaimingNft(false);
+        resetCaptcha();
         setTimeout(() => setFeedback(``), 4000);
       })
       .then((receipt) => {
@@ -463,6 +447,7 @@ function App() {
         );
         setClaimingNft(false);
         dispatch(fetchData(blockchain.account));
+        resetCaptcha();
         setTimeout(() => setFeedback(``), 4000);
       });
   };
@@ -541,6 +526,11 @@ function App() {
   const disconnect = () => {
     console.log('disconnect')
     window.location.reload();
+  }
+
+  const resetCaptcha = () => {
+    setCaptchaSuccess(false);
+    captchaRef.current.reset();
   }
 
   useEffect(() => {
@@ -688,14 +678,14 @@ function App() {
                     </s.Container>
                     <s.SpacerSmall />
                     <s.Container ai={"center"} jc={"center"} fd={"row"}>
-                      <StyledButton3 disabled={captchaSuccess || claimingNft ? 0 : 1}
+                      <StyledButton2 disabled={captchaSuccess || claimingNft ? 0 : 1}
                         onClick={(e) => {
                           e.preventDefault();
                           claimNFTs();
                           getData();
                         }}>
                         {claimingNft ? "MINTING..." : "MINT"}
-                      </StyledButton3>
+                      </StyledButton2>
                     </s.Container>
                     <s.SpacerSmall/>
                     <form>
