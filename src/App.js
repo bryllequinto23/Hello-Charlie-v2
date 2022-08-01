@@ -71,7 +71,7 @@ export const StyledButton3 = styled.button`
   background-color: var(--secondary);
   font-weight: bold;
   color: var(--accent-text);
-  width: 304px;
+  width: 245px;
   font-size: 30px;
   cursor: pointer;
   text-align: center;
@@ -265,7 +265,7 @@ function App() {
   const onChange = async(value) => {
     const token = value;
 
-    if (token !== '') {
+    if (token !== '' && mintRef.current.value === '') {
       await axios.post('/.netlify/functions/helloWorld', {token})
         .then(res => {
           if (res.data.successful) {
@@ -275,7 +275,7 @@ function App() {
           alert(error)
         })
     } else {
-      alert('Please complete the recaptcha challenge!');
+      alert('An error has occurred. Please try again!');
     }
   }
 
@@ -745,11 +745,6 @@ function App() {
                       <s.Container ai={"center"} jc={"center"} fd={"row"}>
                         <StyledButton3 disabled={(!captchaSuccess && !claimingNft) || (captchaSuccess && claimingNft) ? 1 : 0}
                           type="submit">
-                          {/* onClick={(e) => {
-                            e.preventDefault();
-                            claimNFTs();
-                            getData();
-                          }}> */}
                           {claimingNft ? "MINTING..." : "MINT"}
                         </StyledButton3>
                       </s.Container>
