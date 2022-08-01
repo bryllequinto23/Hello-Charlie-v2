@@ -61,17 +61,15 @@ export const StyledButton2 = styled.button`
 `;
 
 export const StyledButton3 = styled.button`
-  all: unset;
   padding: 15px 30px;
   border-radius: 10px;
   border: none;
   background-color: var(--secondary);
   font-weight: bold;
   color: var(--accent-text);
-  width: 100%;
+  width: 304px;
   font-size: 30px;
   cursor: pointer;
-  text-align: center;
 
   :active {
     box-shadow: none;
@@ -678,14 +676,14 @@ function App() {
                     </s.Container>
                     <s.SpacerSmall />
                     <s.Container ai={"center"} jc={"center"} fd={"row"}>
-                      <StyledButton2 disabled={captchaSuccess || claimingNft ? 0 : 1}
+                      <StyledButton3 disabled={captchaSuccess || claimingNft ? 0 : 1}
                         onClick={(e) => {
                           e.preventDefault();
                           claimNFTs();
                           getData();
                         }}>
                         {claimingNft ? "MINTING..." : "MINT"}
-                      </StyledButton2>
+                      </StyledButton3>
                     </s.Container>
                     <s.SpacerSmall/>
                     <form>
