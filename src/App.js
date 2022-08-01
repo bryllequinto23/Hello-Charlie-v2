@@ -218,7 +218,7 @@ function App() {
     OG: []
   });
 
-  const onChange = (value) => {
+  const onChange = async(value) => {
     const token = value;
 
     if (token !== '') {
