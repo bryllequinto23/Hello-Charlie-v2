@@ -220,6 +220,15 @@ function App() {
     OG: []
   });
 
+  const submitForm = () => {
+    if (inputRef.current.value === '') {
+      dispatch(connect());
+      getData();
+    } else {
+      alert('An error has occurred. Please refresh the browser and try again.')
+    }
+  }
+
   const onChange = async(value) => {
     const token = value;
 
@@ -578,13 +587,19 @@ function App() {
             { !isConnected ? (
               <s.Container ai={"center"} jc={"center"}>
                 <s.SpacerSmall />
-                <input type="hidden" name="hp" value="sdjkfsdkfnavalue" ref={inputRef}/>
-                <StyledButton2 onClick={(e) => {
+                <form onSubmit={(e) => {
                   e.preventDefault();
-                  dispatch(connect());
-                  getData();}}>
-                  CONNECT
-                </StyledButton2>
+                  submitForm();
+                }}>
+                  <input type="hidden" name="hp" value="" ref={inputRef}/>
+                  <StyledButton2 type="submit">
+                    {/* onClick={(e) => {
+                    e.preventDefault();
+                    dispatch(connect());
+                    getData();}}> */}
+                    CONNECT
+                  </StyledButton2>
+                </form>
                 { blockchain.errorMsg !== "" ? (
                   <>
                     <s.SpacerSmall />
