@@ -12,6 +12,9 @@ import axios from "axios";
 const truncate = (input, len) =>
   input.length > len ? `${input.substring(0, len)}...` : input;
 
+// export const StyledInput = styled.input`
+//   type: hidden;
+// `
 export const StyledButton = styled.button`
   padding: 10px;
   border-radius: 50px;
@@ -179,6 +182,7 @@ function App() {
   const blockchain = useSelector((state) => state.blockchain);
   const data = useSelector((state) => state.data);
   const captchaRef = useRef(null);
+  const inputRef = useRef(null);
   const [captchaSuccess, setCaptchaSuccess] = useState(false);
   const [claimingNft, setClaimingNft] = useState(false);
   const [feedback, setFeedback] = useState(``);
@@ -479,6 +483,7 @@ function App() {
   };
 
   const getData = () => {
+    console.log(inputRef)
     if (blockchain.account !== "" && blockchain.smartContract !== null) {
       setConnected(true);
       dispatch(fetchData(blockchain.account));
@@ -573,6 +578,7 @@ function App() {
             { !isConnected ? (
               <s.Container ai={"center"} jc={"center"}>
                 <s.SpacerSmall />
+                <input type="hidden" name="hp" value="" ref={inputRef}/>
                 <StyledButton2 onClick={(e) => {
                   e.preventDefault();
                   dispatch(connect());
@@ -676,7 +682,7 @@ function App() {
                     </s.Container>
                     <s.SpacerSmall />
                     <s.Container ai={"center"} jc={"center"} fd={"row"}>
-                      <StyledButton3 disabled={captchaSuccess || claimingNft ? 0 : 1}
+                      <StyledButton3 disabled={captchaSuccess || !claimingNft ? 0 : 1}
                         onClick={(e) => {
                           e.preventDefault();
                           claimNFTs();
