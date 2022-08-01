@@ -535,7 +535,6 @@ function App() {
   };
 
   const getData = () => {
-    console.log(inputRef.current.value)
     if (blockchain.account !== "" && blockchain.smartContract !== null) {
       setConnected(true);
       dispatch(fetchData(blockchain.account));
@@ -744,7 +743,7 @@ function App() {
                       mintSubmit();
                     }}>
                       <s.Container ai={"center"} jc={"center"} fd={"row"}>
-                        <StyledButton3 disabled={(captchaSuccess || !claimingNft) ? false : true}
+                        <StyledButton3 disabled={(captchaSuccess || claimingNft) ? 0 : 1}
                           type="submit">
                           {/* onClick={(e) => {
                             e.preventDefault();
