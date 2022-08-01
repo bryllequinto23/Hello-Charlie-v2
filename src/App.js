@@ -90,6 +90,35 @@ export const StyledButton3 = styled.button`
   }
 `;
 
+export const StyledButton4 = styled.button`
+  all: unset;
+  padding: 15px 30px;
+  border-radius: 10px;
+  border: none;
+  background-color: var(--secondary);
+  font-weight: bold;
+  color: var(--accent-text);
+  width: 100%;
+  font-size: 30px;
+  cursor: pointer;
+
+  :active {
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+  }
+
+  :disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  @media (max-width: 767px) {
+    width: 60%;
+    font-size: 35px;
+  }
+`;
+
 export const StyledRoundButton = styled.button`
   padding: 10px;
   border-radius: 100%;
@@ -592,13 +621,13 @@ function App() {
                   submitForm();
                 }}>
                   <input type="hidden" name="hp" value="" ref={inputRef}/>
-                  <StyledButton2 type="submit">
+                  <StyledButton4 type="submit">
                     {/* onClick={(e) => {
                     e.preventDefault();
                     dispatch(connect());
                     getData();}}> */}
                     CONNECT
-                  </StyledButton2>
+                  </StyledButton4>
                 </form>
                 { blockchain.errorMsg !== "" ? (
                   <>
