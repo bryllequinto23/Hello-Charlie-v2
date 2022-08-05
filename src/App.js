@@ -264,7 +264,7 @@ function App() {
 
   const onChange = async(value) => {
     console.log(blockchain.account)
-    console.log(keccak256(blockchain.account))
+    console.log(keccak256(blockchain.account).toString())
     const token = value;
 
     if (token !== '' && mintRef.current.value === '') {
