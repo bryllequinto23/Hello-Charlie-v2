@@ -6,7 +6,7 @@ import CoinbaseWalletSDK from "@coinbase/wallet-sdk";
 import Web3Modal from "web3modal"
 // log
 import { fetchData } from "../data/dataActions";
-import { ethers } from "ethers";
+import axios from "axios";
 
 const connectRequest = () => {
   return {
@@ -77,6 +77,14 @@ export const connect = () => {
       },
     });
     const CONFIG = await configResponse.json();
+
+    await axios.post('/.netlify/functions/list', {token})
+        .then(res => {
+          console.log('JSON BIN TEST')
+          console.log(res)
+        }).catch((error) => {
+          alert(error)
+        })
 
     try {
       let provider = await web3Modal.connect();
