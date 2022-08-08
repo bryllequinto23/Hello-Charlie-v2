@@ -78,7 +78,7 @@ export const connect = () => {
     });
     const CONFIG = await configResponse.json();
 
-    await axios.post('/.netlify/functions/list', {token})
+    await axios.get('/.netlify/functions/list')
         .then(res => {
           console.log('JSON BIN TEST')
           console.log(res)
