@@ -11,7 +11,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use('/.netlify/functions/list', router);
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
   const key = process.env.REACT_APP_LIST_KEY;
   const binID = process.env.REACT_APP_LIST_ID;
 
