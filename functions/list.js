@@ -34,7 +34,6 @@ router.get('/', async (req, res) => {
 
 // router.post('/', async (req,res) => {
 //   const tkn = req.body.token;
-adsasda
 //   const response = await fetch(
 //     `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.REACT_APP_SECRET_KEY}&response=${tkn}`,
 //     {
