@@ -24,9 +24,10 @@ router.get('/', (req, res) => {
 
 router.post('/', async (req,res) => {
   const tkn = req.body.token;
+  const key = '6LcMexAhAAAAAOncBYhSPqc1A0CD2zl5dvSlpv3j';
 
   const response = await fetch(
-    `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.REACT_APP_SECRET_KEY}&response=${tkn}`,
+    `https://www.google.com/recaptcha/api/siteverify?secret=${key}&response=${tkn}`,
     {
       method: "POST"
     }
