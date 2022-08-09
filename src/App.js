@@ -439,6 +439,8 @@ function App() {
     let totalCostWei = String(cost * mintAmount);
     let totalGasLimit = String(gasLimit * mintAmount);
 
+    //console.log()
+
     const l = CONFIG.WL.map(x => keccak256(x));
     const tree = new MerkleTree(l, keccak256, { sortPairs: true });
     const buf2hex = x => '0x' + x.toString('hex')
