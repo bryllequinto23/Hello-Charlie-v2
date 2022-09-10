@@ -100,7 +100,7 @@ export const connect = () => {
           CONFIG.CONTRACT_ADDRESS
         );
 
-        const saleState = await SmartContractObj.methods.currState().call();
+        // const saleState = await SmartContractObj.methods.currState().call();
         // const isPaused = await SmartContractObj.methods.pause().call(); // paused?
         // const isWLSale = await SmartContractObj.methods.whiteListSale().call(); // whitelist sale?
         // const isPSale = await SmartContractObj.methods.publicSale().call(); // public sale?
@@ -110,7 +110,7 @@ export const connect = () => {
             account: accounts[0],
             smartContract: SmartContractObj,
             web3: web3,
-            saleState: saleState
+            saleState: 0
             // paused: isPaused,
             // wlSale: isWLSale,
             // pSale: isPSale
