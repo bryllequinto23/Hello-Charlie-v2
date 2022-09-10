@@ -209,7 +209,7 @@ export const StyledLink = styled.a`
 `;
 
 function App() {
-  // akdnaksndkjdanskjd
+
   const dispatch = useDispatch();
   const blockchain = useSelector((state) => state.blockchain);
   const data = useSelector((state) => state.data);
@@ -223,7 +223,7 @@ function App() {
   const [isErrorMsg, setErrorMsg] = useState(0);
   const [isConnected, setConnected] = useState(false);
   const [isEligible, setEligibile] = useState(false);
-  // const [wlType, setWlType] = useState(0);
+  const [wlType, setWlType] = useState(0);
   const [walletDisplay, setWalletDisplay] = useState('');
   const [CONFIG, SET_CONFIG] = useState({
     CONTRACT_ADDRESS: "",
@@ -302,10 +302,10 @@ function App() {
 
   const checkStatus = () => {
     blockchain.smartContract.methods
-    .currState()
+    .pause()
     .call()
-    .then((state) => {
-      if (state === 0) {
+    .then((paused) => {
+      if (paused) {
         alert("Minting is paused");
         resetCaptcha();
       } else {
@@ -343,7 +343,7 @@ function App() {
     if (newSupply > maxSupply) {
       alert("Beyond max supply.")
       resetCaptcha();
-    } else if ((blockchain.saleState === 1 && (newOGTotal > maxOG)) || (blockchain.saleState === 2 && (newWlTotal > maxWl)))  {
+    } else if ((wlType === 1 && (newOGTotal > maxOG)) || (wlType === 2 && (newWlTotal > maxWl)))  {
       alert("You have reached the maximum amount of mints.")
       resetCaptcha();
     } else {
@@ -356,7 +356,7 @@ function App() {
         setFeedback(`Minting your Charlie...`);
         setClaimingNft(true);
 
-        if (blockchain.saleState === 1) {
+        if (wlType === 1) {
           console.log('OG MINT')
           ogMint();
         } else {
@@ -529,15 +529,11 @@ function App() {
 
     if (tempTotal === CONFIG.MAX_SUPPLY) {
       newMintAmount = mintAmount;
-    // } else if (blockchain.wlSale && wlType === 1 && (mintAmount === CONFIG.MAX_MINT_OG)) {
-    //   newMintAmount = mintAmount;
-    // } else if (blockchain.wlSale && wlType === 2 && (mintAmount === CONFIG.MAX_MINT_WL)) {
-    //   newMintAmount = mintAmount;
-    } else if (blockchain.saleState === 1 && (mintAmount === CONFIG.MAX_MINT_OG)) {
+    } else if (blockchain.wlSale && wlType === 1 && (mintAmount === CONFIG.MAX_MINT_OG)) {
       newMintAmount = mintAmount;
-    } else if (blockchain.saleState === 2 && (mintAmount === CONFIG.MAX_MINT_WL)) {
+    } else if (blockchain.wlSale && wlType === 2 && (mintAmount === CONFIG.MAX_MINT_WL)) {
       newMintAmount = mintAmount;
-    } else if (blockchain.saleState === 3 && (mintAmount === CONFIG.MAX_MINT_PUB)) {
+    } else if (blockchain.pSale && (mintAmount === CONFIG.MAX_MINT_PUB)) {
       newMintAmount = mintAmount;
     } else {
       newMintAmount = mintAmount + 1;
@@ -550,7 +546,7 @@ function App() {
     if (blockchain.account !== "" && blockchain.smartContract !== null) {
       setConnected(true);
       dispatch(fetchData(blockchain.account));
-      if (blockchain.saleState === 1 || blockchain.saleState === 2) {
+      if (blockchain.wlSale) {
         checkEligibility();
       }
 
@@ -571,7 +567,7 @@ function App() {
     if (isWl || isOG) {
       const ogType = isOG ? 1 : 2;
 
-      // setWlType(ogType);
+      setWlType(ogType);
       setEligibile(true);
     } else {
       setEligibile(false);
@@ -613,8 +609,7 @@ function App() {
       <s.Container2 flex={2} image={CONFIG.SHOW_BACKGROUND ? "/config/images/bg6.png" : null}>
       </s.Container2>
       {process.env.REACT_APP_API_KEY}
-      {/* { isConnected && (blockchain.paused || (blockchain.wlSale && !isEligible) || (!blockchain.paused && !blockchain.wlSale && !blockchain.pSale)) ? ( */}
-      { isConnected && (blockchain.saleState === 0 || ((blockchain.saleState === 1 || blockchain.saleState === 2) && !isEligible)) ? (
+      { isConnected && (blockchain.paused || (blockchain.wlSale && !isEligible) || (!blockchain.paused && !blockchain.wlSale && !blockchain.pSale)) ? (
         <s.Container3 flex={2}>
           <s.Container flex={2} jc={"center"} ai={"center"}>
             <s.TextTitle style={{
@@ -622,7 +617,8 @@ function App() {
               fontSize: 50,
               fontWeight: "bold",
               color: "var(--primary-text)",}}>
-              { blockchain.saleState === 0 ? "Minting is not allowed at the moment" : "You are not OG/whitelisted." }
+              { blockchain.paused || (!blockchain.paused && !blockchain.wlSale && !blockchain.pSale) ? 
+                "Minting is not allowed at the moment" : "You are not OG/whitelisted." }
             </s.TextTitle>
             <s.SpacerSmall />
             <s.TextDescription2>
@@ -704,8 +700,7 @@ function App() {
                 ) : (
                   <>
                     <s.TextTitle style={{ textAlign: "center", color: "var(--primary-text)" }}>
-                        {/* 1 Charlie = { blockchain.wlSale ? (wlType === 1 ? CONFIG.DISPLAY_COST_OG : CONFIG.DISPLAY_COST_WL) : CONFIG.DISPLAY_COST}{" "} */}
-                        1 Charlie = { blockchain.saleState === 3 ? CONFIG.DISPLAY_COST : (blockchain.saleState === 1 ? CONFIG.DISPLAY_COST_OG : CONFIG.DISPLAY_COST_WL)}{" "}
+                        1 Charlie = { blockchain.wlSale ? (wlType === 1 ? CONFIG.DISPLAY_COST_OG : CONFIG.DISPLAY_COST_WL) : CONFIG.DISPLAY_COST}{" "}
                         {CONFIG.NETWORK.SYMBOL}.
                     </s.TextTitle>
                     {/* <s.SpacerXSmall />
